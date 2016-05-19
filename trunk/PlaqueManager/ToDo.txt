@@ -1,0 +1,2 @@
+1. Fix export bug, missing return
+2. add function to print from text file temporarily.

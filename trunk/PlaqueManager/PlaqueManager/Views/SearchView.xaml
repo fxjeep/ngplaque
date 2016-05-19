@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="PlaqueManager.Views.SearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cal="http://www.caliburnproject.org"
+             mc:Ignorable="d" 
+             ResxExtension.DefaultResxName="PlaqueManager.Views.MainWindow"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Border Background="GhostWhite" BorderBrush="Silver" BorderThickness="1" CornerRadius="8,8,3,3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Margin="5">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                        <Rectangle Width="10" Height="10">
+                            <Rectangle.Fill>
+                                <VisualBrush Visual="{StaticResource appbar_magnify}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBox Name="SearchText" Width="150" Margin="5,0,0,5"
+                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                                 cal:Message.Attach="[Event KeyUp] = [Action Search($executionContext)]"
+                                 ></TextBox>
+                        <ComboBox Width="100" Margin="5,0,0,5"
+                                  Visibility="{Binding ParameterVisibility, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedIndex="{Binding SelectedOptionIndex, UpdateSourceTrigger=PropertyChanged}"
+                                  ItemsSource="{Binding SearchOption}">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Name="NewContact"
+                                Style="{StaticResource MaterialDesignFlatButtonLessPadding}">
+                            <Image Source="Images/ContactAdd.png" 
+                                   Width="35" Height="35"
+                                   ToolTip="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=Search_AddNewContact_Tooltip}"></Image>
+                        </Button>
+                        <Button Name="DelContact" 
+                                Style="{StaticResource MaterialDesignFlatButtonLessPadding}">
+                            <Image Source="Images/ContactDelete.png" 
+                                   Width="35" Height="35"
+                                   ToolTip="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=Search_DeleteSelectedContact_Tooltip}"></Image>
+                        </Button>
+                        <Button x:Name="AddPrint" 
+                                                Style="{StaticResource MaterialDesignFlatButtonLessPadding}">
+                            <Image Source="Images/ContactPrint.png" 
+                                                Width="35" Height="35"
+                                                ToolTip="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=Search_PrintSelectedContact_Tooltip}"></Image>
+                        </Button>
+                        <Button x:Name="GenerateReport" 
+                                                Style="{StaticResource MaterialDesignFlatButtonLessPadding}">
+                            <Image Source="Images/ContactReport.png" 
+                                                    Width="35" Height="35"
+                                                ToolTip="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=Search_AddReportSelectedContact_Tooltip}"></Image>
+                        </Button>
+                        <Button x:Name="Export" Style="{StaticResource MaterialDesignFlatButtonLessPadding}">
+                            <Image Source="Images/ExportSingle.png" 
+                                                    Width="35" Height="35"
+                                                ToolTip="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=Search_ExportSelectedContact_Tooltip}"></Image>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                
+                <DataGrid Grid.Row="1"
+                          SelectionMode="Single"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Path=ContactList}"
+                          SelectedItem ="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}"
+                          cal:Message.Attach="[Event RowEditEnding] = [Action EditContactRow($executionContext)];
+                                              [Event SelectionChanged]=[Action ContactRowSelected($executionContext)];
+                                              [Event ContextMenuOpening] = [Action ContextMenuOpening($executionContext)]"
+                          >
+                    <DataGrid.ContextMenu>
+                        <ContextMenu Name="SearchContext">
+                            <MenuItem Header="{Binding Path=PrintContactMenu}" 
+                                      cal:Message.Attach="PrintContact($executionContext)"/>
+                            <MenuItem Header="{Binding Path=GenerateDetailMenu}" 
+                                      cal:Message.Attach="GenerateDetail($executionContext)"/>
+                            <MenuItem Header="{Binding Path=ExportDataMenu}" 
+                                      cal:Message.Attach="ExportData($executionContext)"/>
+                            <MenuItem Header="{Binding Path=MergeContactMenu}" 
+                                      cal:Message.Attach="MergeContact($executionContext)"/>
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="Images/PrintFlag.png" 
+                                           Visibility="{Binding Path=IsPrint, Converter={StaticResource visibilityconverter},Mode=OneWay}" 
+                                           Width="16" Height="16"></Image>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=ContactNameHeader}"
+                                            Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=ContactCodeHeader}"
+                                            Binding="{Binding Code, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="{Resx ResxName=PlaqueManager.Views.MainWindow, Key=ContactLastPrintHeader}"
+                                            Binding="{Binding LastPrint, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

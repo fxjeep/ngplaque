@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaqueManager", "PlaqueManager\PlaqueManager.csproj", "{B26B5F8F-B130-4B62-81A1-CAD8121591DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaqueData", "Data\PlaqueData.csproj", "{287FB7F6-C2C8-47EE-8C32-AA858E32B93C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B26B5F8F-B130-4B62-81A1-CAD8121591DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B26B5F8F-B130-4B62-81A1-CAD8121591DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B26B5F8F-B130-4B62-81A1-CAD8121591DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B26B5F8F-B130-4B62-81A1-CAD8121591DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{287FB7F6-C2C8-47EE-8C32-AA858E32B93C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{287FB7F6-C2C8-47EE-8C32-AA858E32B93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{287FB7F6-C2C8-47EE-8C32-AA858E32B93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{287FB7F6-C2C8-47EE-8C32-AA858E32B93C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

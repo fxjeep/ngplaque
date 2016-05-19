@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AncestorTabName" xml:space="preserve">
+    <value>Ancestor</value>
+  </data>
+  <data name="AncestorTab_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AncestorTab_Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="ContactCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="ContactCodeHeader" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="ContactLastPrintHeader" xml:space="preserve">
+    <value>Last Print</value>
+  </data>
+  <data name="ContactName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ContactNameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DataView_Backup" xml:space="preserve">
+    <value>Backup Database</value>
+  </data>
+  <data name="DataView_BackupButton" xml:space="preserve">
+    <value>Backup Database</value>
+  </data>
+  <data name="DataView_BackupSuccessFull" xml:space="preserve">
+    <value>Backup is done . File saved in Backup folder</value>
+  </data>
+  <data name="DataView_ChangeFileButton" xml:space="preserve">
+    <value>Change File</value>
+  </data>
+  <data name="DataView_CurrentDataFile" xml:space="preserve">
+    <value>Current Data Folder</value>
+  </data>
+  <data name="DataView_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="DataView_ExportButton" xml:space="preserve">
+    <value>Export Data to Text File</value>
+  </data>
+  <data name="DataView_Import" xml:space="preserve">
+    <value>Import (Tab Delimited)</value>
+  </data>
+  <data name="DataView_ImportAncestor" xml:space="preserve">
+    <value>Ancestor Data</value>
+  </data>
+  <data name="DataView_ImportDead" xml:space="preserve">
+    <value>Dead Data</value>
+  </data>
+  <data name="DataView_ImportLive" xml:space="preserve">
+    <value>Live Data</value>
+  </data>
+  <data name="Data_BackupSuccessFull" xml:space="preserve">
+    <value>Backup Finished</value>
+  </data>
+  <data name="DeadName" xml:space="preserve">
+    <value>Dead Name</value>
+  </data>
+  <data name="DeadTabName" xml:space="preserve">
+    <value>Dead</value>
+  </data>
+  <data name="DeadTab_Dead" xml:space="preserve">
+    <value>Dead</value>
+  </data>
+  <data name="DeadTab_Live" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="DeadTab_Relation" xml:space="preserve">
+    <value>Relation</value>
+  </data>
+  <data name="IsPrint" xml:space="preserve">
+    <value>IsPrint</value>
+  </data>
+  <data name="IsPrintHeader" xml:space="preserve">
+    <value>P/R</value>
+  </data>
+  <data name="LastPrintHeader" xml:space="preserve">
+    <value>Last Print Date</value>
+  </data>
+  <data name="LiveName" xml:space="preserve">
+    <value>Live Name</value>
+  </data>
+  <data name="LiveTabName" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="LiveTab_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Merge_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Merge_MergeButton" xml:space="preserve">
+    <value>Merge</value>
+  </data>
+  <data name="Merge_MergeFrom" xml:space="preserve">
+    <value>Merge detail from Contact</value>
+  </data>
+  <data name="Merge_MergeTo" xml:space="preserve">
+    <value>Merge into Contact</value>
+  </data>
+  <data name="Output_Ancestor" xml:space="preserve">
+    <value>Ancestor</value>
+  </data>
+  <data name="Output_ClearPrintConfirm" xml:space="preserve">
+    <value>Do you want to clear prints?</value>
+  </data>
+  <data name="Output_ClearPrinted" xml:space="preserve">
+    <value>Reset Printed Contacts</value>
+  </data>
+  <data name="Output_ClearPrintTitle" xml:space="preserve">
+    <value>Clear Print</value>
+  </data>
+  <data name="Output_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Output_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Output_Dead" xml:space="preserve">
+    <value>Dead</value>
+  </data>
+  <data name="Output_Generate" xml:space="preserve">
+    <value>Generate Print Files</value>
+  </data>
+  <data name="Output_Live" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="Output_Print" xml:space="preserve">
+    <value>Print Date</value>
+  </data>
+  <data name="Output_Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Output_ReportTotal" xml:space="preserve">
+    <value>Total Contact in print: {0}, Live: {1}, Dead: {2}, Ancestor: {3};</value>
+  </data>
+  <data name="PrintDate" xml:space="preserve">
+    <value>PrintDate</value>
+  </data>
+  <data name="SearchContact" xml:space="preserve">
+    <value>Search Contact</value>
+  </data>
+  <data name="SearchDead" xml:space="preserve">
+    <value>Search Dead</value>
+  </data>
+  <data name="SearchLive" xml:space="preserve">
+    <value>Search Live</value>
+  </data>
+  <data name="Search_AddNewContact_Tooltip" xml:space="preserve">
+    <value>Add New Contact</value>
+  </data>
+  <data name="Search_AddReportSelectedContact_Tooltip" xml:space="preserve">
+    <value>Generate detail report for selected contact</value>
+  </data>
+  <data name="Search_DeleteContactConfirm" xml:space="preserve">
+    <value>Do you want to delete {0}({1})?</value>
+  </data>
+  <data name="Search_DeleteContactConfirmTitle" xml:space="preserve">
+    <value>Delete Contact</value>
+  </data>
+  <data name="Search_DeleteSelectedContact_Tooltip" xml:space="preserve">
+    <value>Delete selected contact</value>
+  </data>
+  <data name="Search_ExportContactFinish" xml:space="preserve">
+    <value>Export {0} data finished.</value>
+  </data>
+  <data name="Search_ExportContactTitle" xml:space="preserve">
+    <value>Export Contact Data</value>
+  </data>
+  <data name="Search_ExportDataMenu" xml:space="preserve">
+    <value>Export data for {0}</value>
+  </data>
+  <data name="Search_ExportFinish" xml:space="preserve">
+    <value>Export Finished.</value>
+  </data>
+  <data name="Search_ExportSelectedContact_Tooltip" xml:space="preserve">
+    <value>Export data for selected contact</value>
+  </data>
+  <data name="Search_GenerateContactReportFinish" xml:space="preserve">
+    <value>Detail Report for {0} is generated.</value>
+  </data>
+  <data name="Search_GenerateContactReportTitle" xml:space="preserve">
+    <value>Generate Detail Report</value>
+  </data>
+  <data name="Search_GenerateDetailMenu" xml:space="preserve">
+    <value>Generate Detail Report for {0}</value>
+  </data>
+  <data name="Search_MergeContactMenu" xml:space="preserve">
+    <value>Merge {0} to another contact</value>
+  </data>
+  <data name="Search_MergeContact_Tooltip" xml:space="preserve">
+    <value>Merge selected contact to another contact</value>
+  </data>
+  <data name="Search_PrintContactMenu" xml:space="preserve">
+    <value>Print {0}</value>
+  </data>
+  <data name="Search_PrintSelectedContact_Tooltip" xml:space="preserve">
+    <value>Print selected contact</value>
+  </data>
+  <data name="SelectContact" xml:space="preserve">
+    <value>Select a Contact</value>
+  </data>
+</root>

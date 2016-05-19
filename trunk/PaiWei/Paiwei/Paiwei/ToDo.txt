@@ -1,0 +1,8 @@
+﻿1. fix english position on side [done]
+2. try to print mixed texts [done]
+3. record text size for different type. 
+4. able to set start page no.
+5. remember font size setting with different type
+6. display property font size setting with type.
+7. input text within program.
+8. Detect undisplayable text in the font it choosed
