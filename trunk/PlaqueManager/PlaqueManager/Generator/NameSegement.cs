@@ -18,8 +18,21 @@ namespace PlaqueManager.Generator
             for (int i = 0; i < name.Length; i++)
             {
                 //get a character
-                int code = Char.ConvertToUtf32(name, i);
-                string chara = name.Substring(i, 1);
+                var curChar = name[i];
+                int code = 0;
+                string chara = "";
+                if (Char.IsSurrogate(curChar) && i != name.Length - 1)
+                {
+                    code = Char.ConvertToUtf32(curChar, name[i+1]);
+                    chara = name.Substring(i, 2);
+                    i ++;
+                }
+                else
+                {
+                    code = Char.ConvertToUtf32(name, i);
+                    chara = name.Substring(i, 1);
+                }
+                
 
                 if (code >= Configure.ChineseFrom && code <= Configure.ChineseEnd)
                 {
