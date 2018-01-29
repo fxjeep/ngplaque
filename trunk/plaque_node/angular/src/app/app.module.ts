@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from "./components/login.component";
 import { PanelComponent } from "./components/panel.component";
 
-
 @NgModule({
     declarations: [AppComponent, LoginComponent, PanelComponent],
     imports: [BrowserModule, routing],
