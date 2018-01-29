@@ -11,3 +11,5 @@
 /trunk/PlaqueManager/PlaqueManager/bin/Release
 /trunk/PlaqueManager/PlaqueManager/obj/Release
 /trunk/PlaqueManager/Data/obj/Release
+trunk/plaque_node/webapi/node_modules/*
+.gitignore
