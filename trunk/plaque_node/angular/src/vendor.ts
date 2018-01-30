@@ -9,7 +9,6 @@ import '@angular/router';
 import '@angular/material';
 import '@angular/http';
 import "@angular/material";
-import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 // RxJS 5
 import 'rxjs/add/operator/map';
