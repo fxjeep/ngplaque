@@ -13,3 +13,5 @@
 /trunk/PlaqueManager/Data/obj/Release
 trunk/plaque_node/webapi/node_modules/*
 .gitignore
+/trunk/plaque_node/angular/node_modules/*
+/trunk/plaque_node/angular/dist/*
