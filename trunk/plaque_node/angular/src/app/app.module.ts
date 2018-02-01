@@ -9,11 +9,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [AppComponent, LoginComponent, PanelComponent],
     imports: [BrowserModule, routing, BrowserAnimationsModule,
-        MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule],
+        MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, FormsModule],
     bootstrap: [AppComponent]
 })
 export class AppModule { };

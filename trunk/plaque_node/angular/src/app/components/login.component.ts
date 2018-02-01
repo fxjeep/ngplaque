@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import {MatButtonModule} from '@angular/material';
 
@@ -11,12 +11,14 @@ import {MatButtonModule} from '@angular/material';
      <mat-card-content>
         <form class="example-container">
             <mat-form-field>
-                    <input matInput floatPlaceholder="never" type="text"
-                        placeholder="User Email" required>
+                    <input matInput floatPlaceholder="never" type="text" placeholder="User Email" required
+                    name="email" 
+                    [(ngModel)]="email"/>
             </mat-form-field>
             <mat-form-field>
-                    <input matInput floatPlaceholder="never" type="password"
-                        placeholder="Password" required>
+                    <input matInput floatPlaceholder="never" type="password" placeholder="Password" required
+                    name="password" 
+                        [(ngModel)]="password"/>
             </mat-form-field>
         </form>
     </mat-card-content>
@@ -28,17 +30,19 @@ import {MatButtonModule} from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-    text: string;
+    email: string = "111";
+    password: string = "22";
 
     constructor(activeRoute: ActivatedRoute,
         private router: Router) {
     }
 
     ngOnInit(): void {
-        this.text  = "Login";
     }
 
     login():void{
+        alert(this.email);
+        alert(this.password);
         this.router.navigateByUrl("/panel");
     }
 };
