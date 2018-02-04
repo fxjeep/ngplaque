@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import {MatButtonModule} from '@angular/material';
-
+import { CommonService } from "./common.service";
 
 @Component({
     selector: 'login',
@@ -33,8 +33,9 @@ export class LoginComponent implements OnInit {
     email: string = "111";
     password: string = "22";
 
-    constructor(activeRoute: ActivatedRoute,
-        private router: Router) {
+    constructor(private activeRoute: ActivatedRoute,
+        private router: Router,
+        private commonSvc: CommonService) {
     }
 
     ngOnInit(): void {
