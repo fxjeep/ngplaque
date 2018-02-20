@@ -7,6 +7,7 @@ var path = require('path'),
     mongoose = require('mongoose'),
     compression = require('compression');
 
+var authCtrl = require('./modules/controllers/authcontroller')
 global.config = require('./configure');
 
 
@@ -46,5 +47,12 @@ app.use(function (err, req, res, next) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+//setup routes
+var router = express.Router();
+router.use('/auth', authCtrl);
+
+
 // Configure passport
-http.createServer(app).listen(global.config.PORT);
+var server = http.createServer(app).listen(global.config.PORT);
+
+module.exports = server;
