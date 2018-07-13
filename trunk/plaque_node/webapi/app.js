@@ -1,13 +1,12 @@
 var path = require('path'),
     express = require('express'),
     http = require('http'),
-    csrf = require('csurf'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     mongoose = require('mongoose'),
     compression = require('compression');
 
-var authCtrl = require('./modules/controllers/authcontroller')
+const routes = require("./modules/route");
 global.config = require('./configure');
 
 
@@ -33,7 +32,6 @@ mongoose.connect(global.config.MONGO_CONNECT_URL, function (err, res) {
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(csrf());
 
 // error handler for csrf tokens
 app.use(function (err, req, res, next) {
@@ -49,8 +47,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //setup routes
 var router = express.Router();
-router.use('/auth', authCtrl);
-
+//let authController = new AuthController();
+//router.use('/auth', authController.create);
+app.use('/', routes);
 
 // Configure passport
 var server = http.createServer(app).listen(global.config.PORT);
