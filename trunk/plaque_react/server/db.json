@@ -1,0 +1,23 @@
+{
+  "login": [
+    {
+      "id": 1,
+      "username": "ddd",
+      "password": "ddd"
+    }
+  ],
+  "contacts":[
+      {
+          "id":1,
+          "code":"X1111",
+          "name":"aaaa",
+          "lastPrint":"2018-01-01"
+      },
+      {
+        "id":2,
+        "code":"X2222",
+        "name":"bbbb",
+        "lastPrint":"2018-01-01"
+    }
+  ]
+}
