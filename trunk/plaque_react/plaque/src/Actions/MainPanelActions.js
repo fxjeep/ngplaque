@@ -18,9 +18,33 @@ export function getAllContacts() {
 
 export function updateContact(contact){
     return dispatch => {
-        request("POST", contactsUrl+"/"+contact.id, contact)
+        let cloned = { ... contact };
+        delete cloned.id;
+        request("PUT", contactsUrl+"/"+contact.id, cloned)
             .then(function(contacts){
                 var i=0;
             });
+    };
+}
+
+export function deleteContact(id){
+    return dispatch => {
+        request("DELETE", contactsUrl+"/"+id)
+            .then(function(contacts){
+                dispatch({ type: mainPanelActions.deleteContact, id });
+            });
+    };
+}
+
+export function addNewContact(){
+    return dispatch => {
+        let newcontact = {
+            "name": "test","code":"z99999","lastPrint":"2000-01-01"
+        };
+        request("POST", contactsUrl, newcontact)
+            .then(function(newcontact){
+                dispatch({ type: mainPanelActions.addContact, newcontact });
+            });
+        
     };
 }

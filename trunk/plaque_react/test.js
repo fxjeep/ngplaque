@@ -108,7 +108,7 @@ class EditableTable extends React.Component {
                   </EditableContext.Consumer>
                   <Popconfirm
                     title="Sure to cancel?"
-                    onConfirm={() => this.cancel(record.key)}
+                    onConfirm={() => this.cancel(record.id)}
                   >
                     <a>Cancel</a>
                   </Popconfirm>

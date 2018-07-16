@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Table, Card, Row, Col, Form, Input, Popconfirm } from 'antd';
-import { getAllContacts, updateContact } from '../Actions/MainPanelActions';
+import { Table, Card, Row, Col, Form, Input, Popconfirm, Icon, Button } from 'antd';
+import { getAllContacts, updateContact, deleteContact, addNewContact } from '../Actions/MainPanelActions';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -91,21 +91,32 @@ class MainPanel extends Component {
                     <span>
                     <EditableContext.Consumer>
                         {form => (
-                        <a
-                            href="javascript:;"
-                            onClick={() => this.save(form, record.key)}
-                            style={{ marginRight: 8 }}
-                        >Save</a>
+                            <a
+                                href="javascript:;"
+                                onClick={() => this.save(form, record.id)}
+                                className="controlIcon"
+                            ><Icon type="check" /></a>
                         )}
                     </EditableContext.Consumer>
                     
                         <a
                             href="javascript:;"
-                            onClick={() => this.cancel(record.key)}
-                        >Cancel</a>
+                            onClick={() => this.cancel(record.id)}
+                            className="controlIcon"
+                        ><Icon type="close" /></a>
                     </span>
                 ) : (
-                    <a onClick={() => this.edit(record.key)}>Edit</a>
+                  <div>
+                    <a onClick={() => this.edit(record.id)} className="controlIcon"><Icon type="edit" /></a>
+                    <Popconfirm
+                      title="Sure to delete?"
+                      onConfirm={() => this.delete(record.id)}
+                    >
+                      <a className="controlIcon"><Icon type="close-circle-o" /></a>
+                    </Popconfirm>
+
+                    <a onClick={() => this.editDetails(record.id)} className="controlIcon"><Icon type="contacts" /></a>
+                  </div>
                 )}
               </div>
             );
@@ -121,16 +132,36 @@ class MainPanel extends Component {
         this.setState({ editingKey: key });
     };
 
+    addNew(){
+      this.props.dispatch(addNewContact());
+    };
+
+    editDetails(key){
+
+    }
+
     cancel = () => {
         this.setState({ editingKey: '' });
     };
 
+    delete(key) {
+      this.props.dispatch(deleteContact(key));
+    }
+
+
     save(form, key) {
+      form.validateFields((error, row) => {
           const index = this.props.contacts.findIndex(item => key === item.key);
           if (index > -1) {
             const item = this.props.contacts[index];
-            this.props.dispatch(updateContact(item));
+            this.props.contacts.splice(index, 1, {
+              ...item,
+              ...row,
+            });
+            this.props.dispatch(updateContact(this.props.contacts[index]));
+            this.setState({ editingKey: '' });
           }
+      });
     }
 
     tablComponents = {
@@ -161,10 +192,13 @@ class MainPanel extends Component {
         return <div className="mainpanel">
             <Card title="Contacts" bordered={true}>
                 <Row type="flex">
-                    <Col>Commands</Col>
+                    <Col><Button type="primary" onClick={()=>this.addNew()}>Add Contact</Button></Col>
+                    <Col><Button type="primary" >Gen Print File</Button></Col>
+                    <Col><Button type="primary" >Export Data</Button></Col>
                 </Row>
                 <Row type="flex">
                     <Table 
+                        rowKey='id'
                         components={this.tablComponents}
                         columns={columns} 
                         dataSource={this.props.contacts} />
