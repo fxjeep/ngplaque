@@ -39,12 +39,20 @@ export function deleteContact(id){
 export function addNewContact(){
     return dispatch => {
         let newcontact = {
-            "name": "test","code":"z99999","lastPrint":"2000-01-01"
+            "name": "test",
+            "code":"z99999",
+            "lastPrint":"2000-01-01",
         };
         request("POST", contactsUrl, newcontact)
             .then(function(newcontact){
                 dispatch({ type: mainPanelActions.addContact, newcontact });
             });
         
+    };
+}
+
+export function showDetails(){
+    return dispatch =>{
+
     };
 }

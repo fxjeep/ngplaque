@@ -10,6 +10,7 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { history } from './Utils/history';
 import { Login } from './Components/Login';
 import { MainPanel}  from './Components/MainPanel';
+import { EditDetail } from './Components/EditDetail'
 
 
 import 'antd/dist/antd.css';
@@ -43,6 +44,13 @@ class App extends Component {
                         return <Redirect to="/" />
                     }
                 }} />
+        <Route exact path="/detail" render={(props)=>{
+              if (true){
+                  return <EditDetail {...props} />
+              }else{
+                  return <Redirect to="/" />
+              }
+          }} />
       </div>
       </Router>
       

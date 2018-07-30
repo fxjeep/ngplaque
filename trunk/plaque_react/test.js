@@ -99,7 +99,7 @@ class EditableTable extends React.Component {
                     {form => (
                       <a
                         href="javascript:;"
-                        onClick={() => this.save(form, record.key)}
+                        onClick={() => this.save(form, record.id)}
                         style={{ marginRight: 8 }}
                       >
                         Save
@@ -114,7 +114,7 @@ class EditableTable extends React.Component {
                   </Popconfirm>
                 </span>
               ) : (
-                <a onClick={() => this.edit(record.key)}>Edit</a>
+                <a onClick={() => this.edit(record.id)}>Edit</a>
               )}
             </div>
           );
@@ -124,20 +124,20 @@ class EditableTable extends React.Component {
   }
 
   isEditing = (record) => {
-    return record.key === this.state.editingKey;
+    return record.id === this.state.editingKey;
   };
 
-  edit(key) {
-    this.setState({ editingKey: key });
+  edit(id) {
+    this.setState({ editingKey: id });
   }
 
-  save(form, key) {
+  save(form, id) {
     form.validateFields((error, row) => {
       if (error) {
         return;
       }
       const newData = [...this.state.data];
-      const index = newData.findIndex(item => key === item.key);
+      const index = newData.findIndex(item => id === item.id);
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, {

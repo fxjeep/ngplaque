@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Table, Card, Row, Col, Form, Input, Popconfirm, Icon, Button } from 'antd';
-import { getAllContacts, updateContact, deleteContact, addNewContact } from '../Actions/MainPanelActions';
+import { getAllContacts, updateContact, deleteContact, addNewContact,showDetails } from '../Actions/MainPanelActions';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -60,7 +60,7 @@ class MainPanel extends Component {
     constructor(props) {
         super(props);
         this.props.dispatch(getAllContacts());
-        this.state = { editingKey: '' };
+        this.state = { editingKey: '', searchTxt:'' };
     }
 
     contactColumns = [{
@@ -107,7 +107,7 @@ class MainPanel extends Component {
                     </span>
                 ) : (
                   <div>
-                    <a onClick={() => this.edit(record.id)} className="controlIcon"><Icon type="edit" /></a>
+                    <a onClick={()=>this.edit(record.id)} className="controlIcon" key={record.id}><Icon type="edit" /></a>
                     <Popconfirm
                       title="Sure to delete?"
                       onConfirm={() => this.delete(record.id)}
@@ -125,33 +125,50 @@ class MainPanel extends Component {
     ];
 
     isEditing = (record) => {
-        return record.key === this.state.editingKey;
+        return record.id === this.state.editingKey;
     };
 
-    edit(key) {
-        this.setState({ editingKey: key });
+    edit(id){
+        this.setState({ editingKey: id });
     };
 
     addNew(){
       this.props.dispatch(addNewContact());
     };
 
-    editDetails(key){
-
+    editDetails(id){
+      this.props.dispatch(showDetails(id));
     }
 
     cancel = () => {
         this.setState({ editingKey: '' });
     };
 
-    delete(key) {
-      this.props.dispatch(deleteContact(key));
+    delete(id) {
+      this.props.dispatch(deleteContact(id));
     }
 
+    addSearch(text){
+      this.setState({searchTxt:text});
+    }
 
-    save(form, key) {
+    showAll = ()=>{
+      this.setState({searchTxt:""});
+    }
+
+    hasSearchText(contact){
+      if (this.state.searchTxt=='') return true;
+      
+      if ((contact.name.indexOf(this.state.searchTxt)>=0 
+          || contact.code.indexOf(this.state.searchTxt)>=0))
+        return true;
+      
+      return false;
+    }
+
+    save(form, id) {
       form.validateFields((error, row) => {
-          const index = this.props.contacts.findIndex(item => key === item.key);
+          const index = this.props.contacts.findIndex(item => id === item.id);
           if (index > -1) {
             const item = this.props.contacts[index];
             this.props.contacts.splice(index, 1, {
@@ -192,16 +209,21 @@ class MainPanel extends Component {
         return <div className="mainpanel">
             <Card title="Contacts" bordered={true}>
                 <Row type="flex">
-                    <Col><Button type="primary" onClick={()=>this.addNew()}>Add Contact</Button></Col>
-                    <Col><Button type="primary" >Gen Print File</Button></Col>
-                    <Col><Button type="primary" >Export Data</Button></Col>
+                    <Col><Button type="primary" onClick={()=>this.addNew()}><Icon type="plus-circle-o" /></Button></Col>
+                    <Col><Button ><Icon type="printer" /></Button></Col>
+                    <Col><Button type="primary" ><Icon type="export" /></Button></Col>
+                </Row>
+                <Row type="flex">
+                    <Col><Button onClick={this.showAll}>All</Button></Col>
+                    <Col><Input.Search placeholder="name or code"
+                          onSearch={(value)=>this.addSearch(value)} ></Input.Search></Col>
                 </Row>
                 <Row type="flex">
                     <Table 
                         rowKey='id'
                         components={this.tablComponents}
                         columns={columns} 
-                        dataSource={this.props.contacts} />
+                        dataSource={this.props.contacts.filter((x)=>this.hasSearchText(x))}/>
                 </Row>
             </Card>
         </div>
