@@ -51,8 +51,3 @@ export function addNewContact(){
     };
 }
 
-export function showDetails(){
-    return dispatch =>{
-
-    };
-}

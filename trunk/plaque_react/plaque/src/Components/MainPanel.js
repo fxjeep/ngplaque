@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Table, Card, Row, Col, Form, Input, Popconfirm, Icon, Button } from 'antd';
 import { getAllContacts, updateContact, deleteContact, addNewContact,showDetails } from '../Actions/MainPanelActions';
-
-const FormItem = Form.Item;
-const EditableContext = React.createContext();
+import { userActions } from '../Actions';
+import { EditableCell, EditableContext } from './EditableCell';
 
 const EditableRow = ({ form, index, ...props }) => (
   <EditableContext.Provider value={form}>
@@ -14,47 +13,6 @@ const EditableRow = ({ form, index, ...props }) => (
 );
 
 const EditableFormRow = Form.create()(EditableRow);
-
-class EditableCell extends React.Component {
-    getInput = () => {
-      return <Input />;
-    };
-  
-    render() {
-      const {
-        editing,
-        dataIndex,
-        title,
-        inputType,
-        record,
-        index,
-        ...restProps
-      } = this.props;
-      return (
-        <EditableContext.Consumer>
-          {(form) => {
-            const { getFieldDecorator } = form;
-            return (
-              <td {...restProps}>
-                {editing ? (
-                  <FormItem style={{ margin: 0 }}>
-                    {getFieldDecorator(dataIndex, {
-                      rules: [{
-                        required: true,
-                        message: `Please Input ${title}!`,
-                      }],
-                      initialValue: record[dataIndex],
-                    })(this.getInput())}
-                  </FormItem>
-                ) : restProps.children}
-              </td>
-            );
-          }}
-        </EditableContext.Consumer>
-      );
-    }
-  }
-
 
 class MainPanel extends Component {
     constructor(props) {
@@ -137,7 +95,7 @@ class MainPanel extends Component {
     };
 
     editDetails(id){
-      this.props.dispatch(showDetails(id));
+      this.props.dispatch(userActions.showDetails(id));
     }
 
     cancel = () => {

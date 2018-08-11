@@ -2,6 +2,7 @@ import { history } from '../Utils/history';
 
 export const userActions = {
     login,
+    showDetails
 };
 
 function login(username, password) {
@@ -25,4 +26,10 @@ function login(username, password) {
     function request(user) { return { type: "LOGIN_REQUEST", user } }
     function success(user) { return { type: "LOGIN_SUCCESS", user } }
     function failure(error) { return { type: "LOGIN_FAILURE", error } }
+}
+
+function showDetails(){
+    return dispatch =>{
+        history.push('/detail');
+    };
 }
