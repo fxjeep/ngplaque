@@ -80,15 +80,21 @@ class Login extends Component {
                     <Button type="primary" onClick={this.login}>Login</Button>
                 </Col>
             </Row>
+            <Row type="flex">
+                <Col span={1}>
+                    {this.props.error}
+                </Col>
+            </Row>
         </Card>
       </div>
     }
 }
 
 function mapStateToProps(state) {
-    const { loggingIn } = state.authentication;
+    const { loggingIn,error } = state.authentication;
     return {
-        loggingIn
+        loggingIn,
+        error
     };
   }
   

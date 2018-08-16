@@ -1,4 +1,7 @@
 import { history } from '../Utils/history';
+import Config from '../config';
+import request, {post} from '../Utils/request';
+import { UserActionConstant} from '../Reducers/authentication';
 
 export const userActions = {
     login,
@@ -7,26 +10,26 @@ export const userActions = {
 
 function login(username, password) {
     return dispatch => {
-        history.push('/main');
-        dispatch({ type: "LOGIN_SUCCESS", username });
-        
-        // userService.login(username, password)
-        //     .then(
-        //         user => { 
-        //             dispatch(success(user)); 
-        //             history.push('/');
-        //         },
-        //         error => {
-        //             dispatch(failure(error.toString()));
-        //             dispatch(alertActions.error(error.toString()));
-        //         }
-        //     );
+        post(Config.LoginUrl, {"name": username, "password":password})
+            .then(
+                result => { 
+                    sessionStorage.setItem(Config.SessionKey, result.token);
+                    success(result.user);
+                    history.push('/main');
+                },
+                error => {
+                    dispatch(failure(error.toString()));
+                    //dispatch(alertActions.error(error.toString()));
+                }
+            );
     };
 
-    function request(user) { return { type: "LOGIN_REQUEST", user } }
-    function success(user) { return { type: "LOGIN_SUCCESS", user } }
-    function failure(error) { return { type: "LOGIN_FAILURE", error } }
+    function request(user) { return { type: UserActionConstant.LOGIN_REQUEST, user } }
+    function success(user) { return { type: UserActionConstant.LOGIN_SUCCESS, user } }
+    function failure(error) { return { type: UserActionConstant.LOGIN_FAILURE, error } }
 }
+
+
 
 function showDetails(){
     return dispatch =>{

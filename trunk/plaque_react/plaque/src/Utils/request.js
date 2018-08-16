@@ -1,4 +1,5 @@
 import { HashRouter } from 'react-router-dom';
+import Config from "../config";
 
 export default function request (method, url, body) {
   method = method.toUpperCase();
@@ -9,25 +10,35 @@ export default function request (method, url, body) {
     body = JSON.stringify(body);
   }
 
-  return fetch(url, {
-    method,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Access-Token': sessionStorage.getItem('access_token') || '' // 从sessionStorage中获取access token
-    },
-    body
-  })
-    .then((res) => {
-      if (res.status === 401) {
+  let rawResp;
+
+  return fetch(url, {method,
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Methods":"POST, GET, PUT, DELETE, OPTIONS",
+                  'Access-Token': sessionStorage.getItem(Config.SessionKey) || '' // 从sessionStorage中获取access token
+                },
+                body
+    })
+    .then(response => {
+      rawResp = response;
+      return response.json();})
+    .then((respjson) => {
+      if (rawResp.status === 401) {
         HashRouter.push('/login');
         return Promise.reject('Unauthorized.');
-      } else {
-        const token = res.headers.get('access-token');
+      }
+      else if (rawResp.status === 422){
+        return Promise.reject(respjson.error);
+      }
+      else {
+        const token = rawResp.headers.get(Config.SessionKey);
         if (token) {
-          sessionStorage.setItem('access_token', token);
+          sessionStorage.setItem(Config.SessionKey, token);
         }
-        return res.json();
+        return respjson;
       }
     });
 }
