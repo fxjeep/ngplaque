@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Select, Input, Card, Row, Col } from 'antd';
+import { Button, Select, Input, Card, Row, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -76,14 +76,14 @@ class Login extends Component {
                 </Col>
             </Row>
             <Row type="flex">
-                <Col span={1}>
-                    <Button type="primary" onClick={this.login}>Login</Button>
-                </Col>
+                {this.props.error!=''?<Col span={5}><Alert message={this.props.error} type="error" showIcon></Alert>
+                </Col>:null}
             </Row>
             <Row type="flex">
-                <Col span={1}>
-                    {this.props.error}
+                <Col span={2}>
+                    <Button type="primary" onClick={this.login}>Login</Button>
                 </Col>
+                
             </Row>
         </Card>
       </div>

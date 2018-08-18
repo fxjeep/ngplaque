@@ -170,6 +170,7 @@ class MainPanel extends Component {
                     <Col><Button type="primary" onClick={()=>this.addNew()}><Icon type="plus-circle-o" /></Button></Col>
                     <Col><Button ><Icon type="printer" /></Button></Col>
                     <Col><Button type="primary" ><Icon type="export" /></Button></Col>
+                    <Col offset={5}><Button type="primary">Logout</Button></Col>
                 </Row>
                 <Row type="flex">
                     <Col><Button onClick={this.showAll}>All</Button></Col>
