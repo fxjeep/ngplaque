@@ -15,7 +15,7 @@ function login(username, password) {
             .then(
                 result => { 
                     sessionStorage.setItem(Config.SessionKey, result.data.token);
-                    success(result.user);
+                    dispatch(success(result.user));
                     history.push('/main');
                 },
                 error => {
@@ -25,7 +25,7 @@ function login(username, password) {
             );
     };
 
-    function request(user) { return { type: UserActionConstant.LOGIN_REQUEST, user } }
+//    function request(user) { return { type: UserActionConstant.LOGIN_REQUEST, user } }
     function success(user) { return { type: UserActionConstant.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: UserActionConstant.LOGIN_FAILURE, error } }
 }
@@ -33,9 +33,12 @@ function login(username, password) {
 function logout(){
     return dispatch=>{
         sessionStorage.setItem(Config.SessionKey, "");
+        dispatch({ type: UserActionConstant.LOGIN_OUT});
         history.push('/');
     };
 }
+
+
 
 
 

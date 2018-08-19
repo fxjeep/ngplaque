@@ -48,7 +48,7 @@ class Login extends Component {
         return <div className="Login">
             <Card title="Login" bordered={true}>
             <Row type="flex">
-                <Col span={2}>Select Group:</Col>
+                <Col span={3}>Select Group:</Col>
                 <Col>
                     <Select defaultValue="Chinese"  value={this.state.group} onChange={this.changeGroup}>
                         <Option value="Chinese">Chinese</Option>
@@ -57,14 +57,14 @@ class Login extends Component {
                 </Col>
             </Row>
             <Row type="flex">
-                <Col span={2} >User Name:</Col>
+                <Col span={3} >User Name:</Col>
                 <Col >
                     <Input addonBefore="" defaultValue="" name="username" id="username"
                     value={this.state.username} onChange={this.updateUsername}/>
                 </Col>
             </Row>
             <Row type="flex">
-                <Col span={2} >Password:</Col>
+                <Col span={3} >Password:</Col>
                 <Col >
                     <Input addonBefore="" defaultValue="" type="password" name="password" id="password"
                     value={this.state.password} onChange={this.updatePassword}/>
@@ -75,10 +75,9 @@ class Login extends Component {
                 </Col>:null}
             </Row>
             <Row type="flex">
-                <Col span={2}>
+                <Col span={3}>
                     <Button type="primary" onClick={this.login}>Login</Button>
                 </Col>
-                
             </Row>
         </Card>
       </div>
@@ -86,9 +85,9 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    const { loggingIn,error } = state.authentication;
+    const { loggedIn,error } = state.authentication;
     return {
-        loggingIn,
+        loggedIn,
         error
     };
   }

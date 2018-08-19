@@ -11,7 +11,7 @@ import { history } from './Utils/history';
 import { Login } from './Components/Login';
 import { MainPanel}  from './Components/MainPanel';
 import { EditDetail } from './Components/EditDetail';
-import {LoginOut} from './LoginOut';
+import {LoginOut} from './Components/LoginOut';
 
 
 import 'antd/dist/antd.css';

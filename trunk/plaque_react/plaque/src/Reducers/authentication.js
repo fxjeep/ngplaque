@@ -1,7 +1,10 @@
+import { history } from '../Utils/history';
+
 export const UserActionConstant = {
   LOGIN_REQUEST:"LOGIN_REQUEST",
   LOGIN_SUCCESS:"LOGIN_SUCCESS",
-  LOGIN_FAILURE:"LOGIN_FAILURE"
+  LOGIN_FAILURE:"LOGIN_FAILURE",
+  LOGIN_OUT:"LOGIN_OUT"
 };
 
 
@@ -19,21 +22,16 @@ if (user){
 
 export function authentication(state = initialState, action) {
   switch (action.type) {
-    case "LOGIN":
-      return {
-        loggingIn: true,
-        user: action.user
-      };
     case UserActionConstant.LOGIN_SUCCESS:
       return {
         loggedIn: true,
         user: action.user
       };
-    case "LOGIN_FAILURE":
+    case UserActionConstant.LOGIN_FAILURE:
       return {loggedIn: false,
         error: action.error};
-    case "LOGOUT":
-      return {};
+    case UserActionConstant.LOGIN_OUT:
+      return {loggedIn:false, error:''};
     default:
       return state
   }
