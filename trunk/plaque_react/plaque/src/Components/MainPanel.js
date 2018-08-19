@@ -5,6 +5,7 @@ import { Table, Card, Row, Col, Form, Input, Popconfirm, Icon, Button } from 'an
 import { getAllContacts, updateContact, deleteContact, addNewContact,showDetails } from '../Actions/MainPanelActions';
 import { userActions } from '../Actions';
 import { EditableCell, EditableContext } from './EditableCell';
+import {LoginOut} from './LoginOut';
 
 const EditableRow = ({ form, index, ...props }) => (
   <EditableContext.Provider value={form}>
@@ -170,7 +171,6 @@ class MainPanel extends Component {
                     <Col><Button type="primary" onClick={()=>this.addNew()}><Icon type="plus-circle-o" /></Button></Col>
                     <Col><Button ><Icon type="printer" /></Button></Col>
                     <Col><Button type="primary" ><Icon type="export" /></Button></Col>
-                    <Col offset={5}><Button type="primary">Logout</Button></Col>
                 </Row>
                 <Row type="flex">
                     <Col><Button onClick={this.showAll}>All</Button></Col>

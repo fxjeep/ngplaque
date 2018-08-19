@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Select, Input, Card, Row, Col, Alert } from 'antd';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import request, {get, post} from '../Utils/request';
 import { userActions } from '../Actions';
 
 const Option = Select.Option;
 
 class Login extends Component {
-    loginUrl = "http://localhost:4000/login";
-
     constructor(props) {
         super(props);
         this.state = {

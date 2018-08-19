@@ -5,7 +5,8 @@ import { UserActionConstant} from '../Reducers/authentication';
 
 export const userActions = {
     login,
-    showDetails
+    showDetails,
+    logout
 };
 
 function login(username, password) {
@@ -13,7 +14,7 @@ function login(username, password) {
         post(Config.LoginUrl, {"name": username, "password":password})
             .then(
                 result => { 
-                    sessionStorage.setItem(Config.SessionKey, result.token);
+                    sessionStorage.setItem(Config.SessionKey, result.data.token);
                     success(result.user);
                     history.push('/main');
                 },
@@ -27,6 +28,13 @@ function login(username, password) {
     function request(user) { return { type: UserActionConstant.LOGIN_REQUEST, user } }
     function success(user) { return { type: UserActionConstant.LOGIN_SUCCESS, user } }
     function failure(error) { return { type: UserActionConstant.LOGIN_FAILURE, error } }
+}
+
+function logout(){
+    return dispatch=>{
+        sessionStorage.setItem(Config.SessionKey, "");
+        history.push('/');
+    };
 }
 
 

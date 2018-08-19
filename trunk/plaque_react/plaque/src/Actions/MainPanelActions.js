@@ -6,8 +6,8 @@ const contactsUrl = "http://localhost:4000/contacts";
 export function getAllContacts() {
     return dispatch => {
         request("GET", contactsUrl)
-            .then(function(contacts){
-                contacts = contacts.map(x => ({
+            .then(function(response){
+                var contacts = response.data.contacts.map(x => ({
                     ...x,
                     key: x.id
                 }))

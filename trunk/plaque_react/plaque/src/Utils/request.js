@@ -1,4 +1,4 @@
-import { HashRouter } from 'react-router-dom';
+import { history } from '../Utils/history';
 import Config from "../config";
 
 export default function request (method, url, body) {
@@ -18,7 +18,7 @@ export default function request (method, url, body) {
                   'Accept': 'application/json',
                   "Access-Control-Allow-Origin": "*",
                   "Access-Control-Allow-Methods":"POST, GET, PUT, DELETE, OPTIONS",
-                  'Access-Token': sessionStorage.getItem(Config.SessionKey) || '' // 从sessionStorage中获取access token
+                  'authorization': sessionStorage.getItem(Config.SessionKey) || '' // 从sessionStorage中获取access token
                 },
                 body
     })
@@ -27,7 +27,8 @@ export default function request (method, url, body) {
       return response.json();})
     .then((respjson) => {
       if (rawResp.status === 401) {
-        HashRouter.push('/login');
+        sessionStorage.setItem(Config.SessionKey, "");
+        history.push('/');
         return Promise.reject('Unauthorized.');
       }
       else if (rawResp.status === 422){
