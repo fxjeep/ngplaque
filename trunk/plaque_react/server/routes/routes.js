@@ -38,8 +38,9 @@ module.exports = function (app) {
     app.post('/auth/login', userController.login);
     app.post('/auth/signup', userController.create);
     app.get('/contacts', ensureAuthenticated, contactController.list);
-    //app.post('/contacts', ensureAuthenticated, contactController.add);
-    app.post('/contacts', contactController.add);
+    app.post('/contacts', ensureAuthenticated, contactController.add);
+    app.put('/contacts/id', ensureAuthenticated, contactController.update);
+    app.delete('/contacts/', ensureAuthenticated, contactController.delete);
 
     //app.get('/contact/{id}', ensureAuthenticated, contactController.get);
     defaultRoutes(app);
