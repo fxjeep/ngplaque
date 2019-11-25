@@ -1,30 +1,31 @@
 import { Injectable } from '@angular/core';
- 
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+
  
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
  
-  constructor(
-    private firestore: AngularFirestore
-  ) { }
- 
- 
-//   create_NewStudent(record) {
-//     return this.firestore.collection('Students').add(record);
-//   }
- 
-//   read_Students() {
-//     return this.firestore.collection('Students').snapshotChanges();
-//   }
- 
-//   update_Student(recordID,record){
-//     this.firestore.doc('Students/' + recordID).update(record);
-//   }
- 
-//   delete_Student(record_id) {
-//     this.firestore.doc('Students/' + record_id).delete();
-//   }
+  constructor(public afAuth: AngularFireAuth) {
+  }
+
+  login(email: string, password: string) {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        // on success populate variables and select items
+        alert("logedin");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
+  
+  async logout() {
+    await this.afAuth.auth.signOut()
+              .catch(function(error) { 
+                alert(error); 
+              });
+  }
+
 }
