@@ -17,3 +17,6 @@ trunk/plaque_node/webapi/node_modules/*
 /trunk/plaque_node/angular/dist/*
 trunk/plaque_node/node_modules/*
 *
+/firebaseangular/node_modules/*
+/firebaseangular/node_modules/*/*.*
+/firebaseangular/node_modules/**/*.*

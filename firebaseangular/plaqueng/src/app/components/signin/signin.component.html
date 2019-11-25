@@ -1,0 +1,47 @@
+<section class="app-login">
+
+    <div class="columns is-desktop">
+        <div class="column"></div>
+        <div class="column">
+            <div class="container">
+                <h1 class="title">Login</h1>
+                <h2 class="subtitle"></h2>
+            <form #f="ngForm" name="form" (ngSubmit)="f.form.valid && onSubmitLogin()" novalidate>
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                      <input class="input" type="text" placeholder="User Name" name="username"
+                            id="username" required 
+                            #username="ngModel" 
+                            [(ngModel)]="model.username"
+                            [ngClass]="{ 'is-invalid': f.submitted && username.invalid }">
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                      </span>
+                    </p>
+                    <div *ngIf="f.submitted && username.errors?.required">Name is required.</div>
+                  </div>
+                  <div class="field">
+                      <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Password" name="password"
+                                id="password" #password="ngModel" required
+                                [(ngModel)]="model.password"
+                                [ngClass]="{ 'is-invalid': f.submitted && password.invalid }">
+                        <span class="icon is-small is-left">
+                          <i class="fas fa-lock"></i>
+                        </span>
+                      </p>
+                      <div *ngIf="f.submitted && password.errors?.required">Password is required.</div>
+                    </div>
+        
+                    <div class="field">
+                        <p class="control">
+                          <button type="submit" class="button is-success">Login</button>
+                        </p>
+                      </div>
+            </form>
+        </div>
+    
+        </div>
+        <div class="column"></div>
+      </div>
+</section>
