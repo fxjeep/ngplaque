@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyBg5nyqvwseqpJec8ZAmYDaWvtw6Eljlfk",
-    authDomain: "plaque-ffc25.firebaseapp.com",
-    databaseURL: "https://plaque-ffc25.firebaseio.com",
-    projectId: "plaque-ffc25",
-    storageBucket: "plaque-ffc25.appspot.com",
-    messagingSenderId: "440451825818",
-    appId: "1:440451825818:web:113da37bd629bfd2b05f23"
+    apiKey: "AIzaSyBd93kruaPyloWaKjF7jXQtY9wrFOO6-9k",
+    authDomain: "plaque-c4c32.firebaseapp.com",
+    databaseURL: "https://plaque-c4c32.firebaseio.com",
+    projectId: "plaque-c4c32",
+    storageBucket: "plaque-c4c32.appspot.com",
+    messagingSenderId: "989823646962",
+    appId: "1:989823646962:web:3329bcc51d332201b5a46b"
   }
 };
 

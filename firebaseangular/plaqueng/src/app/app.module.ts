@@ -21,6 +21,9 @@ import en from '@angular/common/locales/en';
 import { LoginService } from './service/firebaseService';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { PrintComponent } from './components/print/print.component';
+import { DataComponent } from './components/data/data.component';
 
 registerLocaleData(en);
 
@@ -30,7 +33,10 @@ registerLocaleData(en);
     SigninComponent,
     DashboardComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ContactsComponent,
+    PrintComponent,
+    DataComponent
   ],
   imports: [
     BrowserModule,

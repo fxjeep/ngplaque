@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormsModule} from "@angular/forms";
 import { LoginService } from "../../service/firebaseService";
+import { Router } from  "@angular/router";
 
 @Component({
   selector: 'app-signin',
@@ -8,9 +8,11 @@ import { LoginService } from "../../service/firebaseService";
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  model : any = {username : "", password : ""}
+  model : any = {username : "", 
+                  password : "",
+                 error : ""}
 
-  constructor(public auth: LoginService) { 
+  constructor(public auth: LoginService, public  router:  Router) { 
 
   }
 
@@ -18,7 +20,14 @@ export class SigninComponent implements OnInit {
   }
 
   onSubmitLogin(){
-      alert("ddd");
-      this.auth.login(this.model.username, this.model.password);
+      this.model.error = "";
+      this.auth.login(this.model.username, this.model.password)
+          .then(() => {
+            alert("logedin");
+            this.router.navigate(['contacts']);
+          })
+          .catch((error) => {
+            this.model.error = error;
+          });
   }
 }

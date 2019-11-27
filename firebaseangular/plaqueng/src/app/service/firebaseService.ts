@@ -11,14 +11,7 @@ export class LoginService {
   }
 
   login(email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(() => {
-        // on success populate variables and select items
-        alert("logedin");
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
   
   async logout() {
