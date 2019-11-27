@@ -2,21 +2,22 @@
     <div class="container">
         <div class="navbar-brand">
             <a class="navbar-item brand-text" href="../index.html">PlaqueNG</a>
-            <div class="navbar-burger burger" data-target="navMenu">
+            <div class="navbar-burger burger" data-target="navbarMenu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
-        <div id="navbarMenu" class="navbar-menu">
+        <div id="navbarMenu" class="navbar-menu"  *ngIf="isLoggedIn()">
             <div class="navbar-end">
                 <div class="tabs is-right">
-            <ul>
-                <li><a routerLink="/Contacts" routerLinkActive="active">Contacts</a></li>
-                <li><a routerLink="/Print" routerLinkActive="active">Print</a></li>
-                <li><a routerLink="/Data" routerLinkActive="active">Data</a></li>
-            </ul>
-            </div>
+                    <ul>
+                        <li><a routerLink="/contacts" routerLinkActive="active">Contacts</a></li>
+                        <li><a routerLink="/print" routerLinkActive="active">Print</a></li>
+                        <li><a routerLink="/data" routerLinkActive="active">Data</a></li>
+                        <li><a (click)="logout()">Logout</a></li>
+                    </ul>
+                </div>
             </div> 
         </div>
     </div>
