@@ -15,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import en from '@angular/common/locales/en';
 
 
@@ -24,6 +25,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { PrintComponent } from './components/print/print.component';
 import { DataComponent } from './components/data/data.component';
+import { DetailTabComponent } from './components/detail-tab/detail-tab.component';
+import { DetailEditComponent } from './components/detail-edit/detail-edit.component';
+import { EditComponent } from './components/edit/edit.component';
 
 registerLocaleData(en);
 
@@ -36,7 +40,10 @@ registerLocaleData(en);
     FooterComponent,
     ContactsComponent,
     PrintComponent,
-    DataComponent
+    DataComponent,
+    DetailTabComponent,
+    DetailEditComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
