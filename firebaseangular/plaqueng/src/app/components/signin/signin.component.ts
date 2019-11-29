@@ -23,8 +23,7 @@ export class SigninComponent implements OnInit {
       this.model.error = "";
       this.auth.login(this.model.username, this.model.password)
           .then(() => {
-            alert("logedin");
-            this.router.navigate(['contacts']);
+            this.router.navigate(['edit']);
           })
           .catch((error) => {
             this.model.error = error;

@@ -13,7 +13,7 @@
         </button>        
     </div>
     <div class="buttons">
-        <button class="button is-info" title="New Contact">
+        <button class="button is-info" title="New Contact" (click)="showAdd(newContactForm)">
                 <span class="icon is-small">
                     <i class="fas fa-user-plus"></i>
                 </span>
@@ -81,4 +81,51 @@
                                 </tbody>
         </table>
     </div>
+    <div class="modal" id="newContact" [ngClass]="model.showAdd?'is-active':''">
+                <div class="modal-background"></div>
+                <form #newContactForm="ngForm" name="newContact" (ngSubmit)="newContactForm.form.valid && addContact()" novalidate>
+                <div class="modal-card">
+                                
+                    <header class="modal-card-head">
+                    <p class="modal-card-title">Add New Contact</p>
+                    <button class="delete" aria-label="close" (click)="closeAdd()"></button>
+                    </header>
+                    
+                    <section class="modal-card-body">
+                        
+                                <div class="field">
+                                        <label class="label">Contact Name</label>
+                                        <div class="control has-icons-left has-icons-right">
+                                                <input class="input is-success" type="text" placeholder="Text input" name="newName" required
+                                                #newName="ngModel" 
+                                                [ngClass]="{ 'is-danger': newContactForm.submitted && newName.invalid }"
+                                                [(ngModel)]="model.newName">
+                                                <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                                        </div>
+                                     <p class="help has-text-danger"
+                                        *ngIf="newContactForm.submitted && newName.errors?.required">Name is required</p>
+                                </div>
+                                <div class="field">
+                                        <label class="label">Contact Code</label>
+                                        <div class="control has-icons-left has-icons-right">
+                                                <input class="input is-success" type="text" placeholder="Text input" name="newCode" required
+                                                #newCode="ngModel" 
+                                                [ngClass]="{ 'is-danger': newContactForm.submitted && newCode.invalid }"
+                                                [(ngModel)]="model.newCode">
+                                                <span class="icon is-small is-left"><i class="fas fa-code"></i></span>
+                                        </div>
+                                        <p class="help has-text-danger"                                        
+                                                *ngIf="newContactForm.submitted && newCode.errors?.required">Code is required</p>
+                                </div>
+        
+                        
+                    </section>
+                    <footer class="modal-card-foot">
+                    <button class="button is-success" type="submit">Add</button>
+                    <button class="button" (click)="closeAdd()">Cancel</button>
+                    </footer>
+                
+                </div>
+        </form>
+            </div>
 </section>
