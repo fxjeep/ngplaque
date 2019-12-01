@@ -83,7 +83,7 @@
     </div>
     <div class="modal" id="newContact" [ngClass]="model.showAdd?'is-active':''">
                 <div class="modal-background"></div>
-                <form #newContactForm="ngForm" name="newContact" (ngSubmit)="newContactForm.form.valid && addContact()" novalidate>
+                <form #newContactForm="ngForm" name="newContact" (ngSubmit)="false" novalidate>
                 <div class="modal-card">
                                 
                     <header class="modal-card-head">
@@ -121,7 +121,7 @@
                         
                     </section>
                     <footer class="modal-card-foot">
-                    <button class="button is-success" type="submit">Add</button>
+                    <button class="button is-success" type="button" (click)="addContact()">Add</button>
                     <button class="button" (click)="closeAdd()">Cancel</button>
                     </footer>
                 

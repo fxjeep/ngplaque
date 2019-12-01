@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from "../../service/firebaseService";
+import { PlaqueService } from "../../service/firebaseService";
 import { Router } from  "@angular/router";
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from  "@angular/router";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public auth: LoginService, public  router:  Router) { 
+  constructor(public auth: PlaqueService, public  router:  Router) { 
 
   }
 

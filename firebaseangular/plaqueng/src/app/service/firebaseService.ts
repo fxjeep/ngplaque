@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Contact } from './models';
 
+const ContactCollection:string = "Contacts";
  
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class PlaqueService {
  
   authState: any = null;
+  contactList: any;
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public afAuth: AngularFireAuth,
+              public db: AngularFireDatabase) {
     this.afAuth.authState.subscribe((auth) => { this.authState = auth; });
+    this.contactList = db.list(ContactCollection);
   }
 
   isLoggedIn(){
@@ -28,4 +34,8 @@ export class LoginService {
               });
   }
 
+  createContact(name:string, code: string){
+      let newContact = Contact.createNewContact(name, code);
+      this.contactList.push(newContact);
+  }
 }

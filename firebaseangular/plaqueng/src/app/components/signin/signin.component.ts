@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from "../../service/firebaseService";
+import { PlaqueService } from "../../service/firebaseService";
+import { LoadingBarService } from '@ngx-loading-bar/core';
 import { Router } from  "@angular/router";
 
 @Component({
@@ -12,7 +13,9 @@ export class SigninComponent implements OnInit {
                   password : "",
                  error : ""}
 
-  constructor(public auth: LoginService, public  router:  Router) { 
+  constructor(public plaquesrv: PlaqueService,
+              public  router:  Router, 
+              public loadingBar: LoadingBarService) { 
 
   }
 
@@ -21,12 +24,16 @@ export class SigninComponent implements OnInit {
 
   onSubmitLogin(){
       this.model.error = "";
-      this.auth.login(this.model.username, this.model.password)
+      this.loadingBar.start();
+      this.plaquesrv.login(this.model.username, this.model.password)
           .then(() => {
             this.router.navigate(['edit']);
           })
           .catch((error) => {
             this.model.error = error;
+          })
+          .finally(()=>{
+            this.loadingBar.complete();
           });
   }
 }

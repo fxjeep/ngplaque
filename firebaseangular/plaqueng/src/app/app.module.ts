@@ -16,10 +16,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import en from '@angular/common/locales/en';
 
 
-import { LoginService } from './service/firebaseService';
+import { PlaqueService } from './service/firebaseService';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
@@ -54,9 +56,11 @@ registerLocaleData(en);
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LoadingBarModule,
+    LoadingBarHttpClientModule
   ],
-  providers: [LoginService, AngularFireAuthGuard],
+  providers: [PlaqueService, AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

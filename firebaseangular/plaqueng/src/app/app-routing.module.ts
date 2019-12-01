@@ -10,7 +10,7 @@ import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectL
 
 const adminOnly = () => hasCustomClaim('admin');
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToContacts = () => redirectLoggedInTo(['contacts']);
+const redirectLoggedInToContacts = () => redirectLoggedInTo(['edit']);
 const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
 
 const routes: Routes =  [

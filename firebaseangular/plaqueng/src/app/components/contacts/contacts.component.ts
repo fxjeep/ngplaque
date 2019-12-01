@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { PlaqueService } from "../../service/firebaseService";
 
 
 @Component({
@@ -15,7 +16,9 @@ export class ContactsComponent implements OnInit {
     newCode:''
   }
 
-  constructor() { }
+  constructor(public plaquesrv: PlaqueService) { 
+
+  }
 
   ngOnInit() {
   }
@@ -30,5 +33,7 @@ export class ContactsComponent implements OnInit {
   }
 
   addContact(){
+    this.plaquesrv.createContact(this.model.newName, this.model.newCode);
+    this.model.showAdd = false;
   }
 }
