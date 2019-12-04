@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PlaqueService } from "../../service/firebaseService";
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,14 +14,18 @@ export class ContactsComponent implements OnInit {
   model:any={
     showAdd:false,
     newName:'',
-    newCode:''
+    newCode:'',
+    searchText:'',
+    contacts: [],
+    selectedRow:-1
   }
 
   constructor(public plaquesrv: PlaqueService) { 
-
+    
   }
 
   ngOnInit() {
+    this.model.contacts = this.plaquesrv.contactList.valueChanges();
   }
 
   closeAdd(){
@@ -33,7 +38,20 @@ export class ContactsComponent implements OnInit {
   }
 
   addContact(){
-    this.plaquesrv.createContact(this.model.newName, this.model.newCode);
-    this.model.showAdd = false;
+    var thenable = this.plaquesrv.createContact(this.model.newName, this.model.newCode);
+    let self = this;
+    thenable.then(function(result){
+      self.model.showAdd = false;
+    }, function(error){
+      self.model.showAdd = false;
+    });
+  }
+
+   search(){
+    this.model.contacts = this.plaquesrv.contactList.valueChanges();
+   }
+
+   setClickedRow(index){
+    this.model.selectedRow = index;
   }
 }

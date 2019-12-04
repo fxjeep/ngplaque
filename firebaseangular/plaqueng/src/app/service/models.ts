@@ -6,6 +6,7 @@ export class Contact {
             Name: name,
             Code : code,
             IsPrint: 0,
+            FilterKey: name+"__"+code,
             LastPrint : ''
         };
     }

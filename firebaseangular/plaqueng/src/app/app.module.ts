@@ -30,6 +30,7 @@ import { DataComponent } from './components/data/data.component';
 import { DetailTabComponent } from './components/detail-tab/detail-tab.component';
 import { DetailEditComponent } from './components/detail-edit/detail-edit.component';
 import { EditComponent } from './components/edit/edit.component';
+import { StringFilterPipe } from './service/string-filter.pipe';
 
 registerLocaleData(en);
 
@@ -45,7 +46,8 @@ registerLocaleData(en);
     DataComponent,
     DetailTabComponent,
     DetailEditComponent,
-    EditComponent
+    EditComponent,
+    StringFilterPipe
   ],
   imports: [
     BrowserModule,

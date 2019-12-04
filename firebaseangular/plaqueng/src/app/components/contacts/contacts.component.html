@@ -1,12 +1,14 @@
 <section class="app-contact">
     <div class="field has-addons">
         <p class="control has-icons-left is-expanded">
-            <input class="input" type="search" placeholder="Search code or name">
+            <input class="input" type="search" placeholder="Search code or name"
+                        #searchText="ngModel" 
+                         [(ngModel)]="model.searchText">
             <span class="icon is-small is-left" >
                     <i class="fas fa-search"></i>
             </span>
         </p>
-        <button class="button is-primary" title="Search">
+        <button class="button is-primary" title="Search" (click)="search()">
                 <span class="icon is-small">
                     <i class="fas fa-search"></i>
                 </span>
@@ -35,7 +37,7 @@
                 <span class="icon is-small">
                         <i class="fas fa-table"></i>
                 </span>
-                <span>Print Detail List</span>
+                <span>Print Detail</span>
         </button>
         <button class="button is-warning" title="Export Contact Data">
                 <span class="icon is-small">
@@ -54,31 +56,13 @@
             <th>Op</th>
         </thead>
         <tbody>
-            <tr>
-                <td>ttt</td>
-                <td>t0012</td>
-                <td>2018-01-01</td>
-                <td></td>
+            <tr *ngFor="let contact of model.contacts | async; let i = index" [ngClass]="{'is-selected' : i==model.selectedRow}" (click)="setClickedRow(i)">
+                <td>{{contact.Name}}</td>
+                <td>{{contact.Code}}</td>
+                <td>{{contact.LastPrint}}</td>
+                <td>{{contact.IsPrinted}}</td>
             </tr>
-            <tr class="is-selected">
-                    <td>ttt</td>
-                    <td>t0012</td>
-                    <td>2018-01-01</td>
-                    <td></td>
-                </tr>
-                <tr>
-                        <td>ttt</td>
-                        <td>t0012</td>
-                        <td>2018-01-01</td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                            <td>ttt</td>
-                            <td>t0012</td>
-                            <td>2018-01-01</td>
-                            <td></td>
-                        </tr>
-                                </tbody>
+        </tbody>
         </table>
     </div>
     <div class="modal" id="newContact" [ngClass]="model.showAdd?'is-active':''">

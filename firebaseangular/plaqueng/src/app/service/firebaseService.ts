@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { database } from 'firebase/app';
 import { Contact } from './models';
+import { Observable } from 'rxjs';
 
 const ContactCollection:string = "Contacts";
  
@@ -11,7 +13,7 @@ const ContactCollection:string = "Contacts";
 export class PlaqueService {
  
   authState: any = null;
-  contactList: any;
+  contactList: AngularFireList<Contact>;
 
   constructor(public afAuth: AngularFireAuth,
               public db: AngularFireDatabase) {
@@ -34,8 +36,9 @@ export class PlaqueService {
               });
   }
 
-  createContact(name:string, code: string){
+  createContact(name:string, code: string) : database.ThenableReference{
       let newContact = Contact.createNewContact(name, code);
-      this.contactList.push(newContact);
+      let thenable = this.contactList.push(newContact)
+      return thenable;
   }
 }
