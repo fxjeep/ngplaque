@@ -1,33 +1,37 @@
 <section class="container">
+    <div *ngIf="!model.Contact.Name">Please select a Contact</div>
+    <div *ngIf="model.Contact.Name">
+    <div class="is-fullwidth">
+        <h1>{{model.Contact.Name}} - {{model.Contact.Code}}</h1>
+    </div>
     <div class="tabs is-toggle is-fullwidth">
         <ul>
                 <li [ngClass]="tab=='live'||!tab ?'is-active' : ''">
                 <a (click)="tab='live'">
-                    <span class="icon is-small"><i class="fas fa-user-friends"></i></span>
-                    <span>Lives</span>
+                    <span class="icon is-small"><i class="fas fa-user-friends"></i>Lives</span>
                 </a>
                 </li>
                 <li [ngClass]="tab=='dead' ? 'is-active' : ''">
                 <a (click)="tab='dead'">
-                    <span class="icon is-small"><i class="fas fa-procedures"></i></span>
-                    <span>Deads</span>
+                    <span class="icon is-small"><i class="fas fa-procedures"></i>Deads</span>
                 </a>
                 </li>
                 <li [ngClass]="tab=='ancestor' ? 'is-active' : ''" >
                 <a (click)="tab='ancestor'">
-                    <span class="icon is-small"><i class="fas fa-hat-cowboy-side"></i></span>
-                    <span>Ancestors</span>
+                    <span class="icon is-small"><i class="fas fa-hat-cowboy-side"></i>Ancesters</span>
                 </a>
                 </li>
         </ul>
     </div>
     <div  *ngIf="tab=='live'||!tab ">
-        live
+        <app-detailgrid [type]="DetailType.live" 
+                        ></app-detailgrid>
     </div>
     <div  *ngIf="tab=='dead' ">
-            dead
+        <app-detailgrid [type]="DetailType.dead"></app-detailgrid>
     </div>
-    <div *ngIf="tab=='ancestor' ">
-            ancestors
+    <div *ngIf="tab=='ancestor'">
+        <app-detailgrid [type]="DetailType.ancestor"></app-detailgrid>
     </div>
+</div>
 </section>

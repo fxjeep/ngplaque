@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, Input  } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PlaqueService } from "../../service/firebaseService";
+import {DetailTabComponent} from "../detail-tab/detail-tab.component";
 import { Observable } from 'rxjs';
-
+import {Contact} from '../../service/models';
+import {DialogService} from '../../dialogService/dialog.service';
+import {MessageboxComponent} from '../messagebox/messagebox.component';
 
 @Component({
   selector: 'app-contacts',
@@ -11,21 +14,24 @@ import { Observable } from 'rxjs';
 })
 export class ContactsComponent implements OnInit {
   
+  @Input() editDetail: DetailTabComponent;
+
   model:any={
     showAdd:false,
     newName:'',
     newCode:'',
     searchText:'',
     contacts: [],
-    selectedRow:-1
+    selectedContact: null,
+    error: ""
   }
 
-  constructor(public plaquesrv: PlaqueService) { 
+  constructor(public plaquesrv: PlaqueService, public dialogSvr: DialogService) { 
     
   }
 
   ngOnInit() {
-    this.model.contacts = this.plaquesrv.contactList.valueChanges();
+    this.model.contacts = this.plaquesrv.contactCollection.valueChanges({idField:'ContactId'});
   }
 
   closeAdd(){
@@ -37,21 +43,64 @@ export class ContactsComponent implements OnInit {
     form.resetForm({});
   }
 
-  addContact(){
-    var thenable = this.plaquesrv.createContact(this.model.newName, this.model.newCode);
-    let self = this;
-    thenable.then(function(result){
-      self.model.showAdd = false;
-    }, function(error){
-      self.model.showAdd = false;
-    });
+  clearError(){
+    this.model.error = "";
   }
 
-   search(){
-    this.model.contacts = this.plaquesrv.contactList.valueChanges();
-   }
+  addContact(isValid){
+    if (!isValid) return;
+    
+    let self = this;
+    this.clearError();
+    this.plaquesrv.createContact(this.model.newName, this.model.newCode) 
+                  .then(function(result){
+                    self.model.showAdd = false;
+                  })
+                  .catch(function(error){
+                    self.model.showAdd = false;
+                    self.model.error = error.toString();
+                  });
+    return true;
+  }
 
-   setClickedRow(index){
-    this.model.selectedRow = index;
+   setClickedRow(contact){
+    this.model.selectedContact = contact;
+    this.editDetail.showDetails(contact);
+  }
+
+  delete(contact:Contact){
+    let self = this;
+    const ref = this.dialogSvr.open(MessageboxComponent, 
+      { data: { message: 'Delete contact '+contact.Name+' : '+contact.Code+' ?',
+                title: 'Confirm Delete Contact',
+                okCallback: function(){
+                      ref.close();
+                      self.plaquesrv.deleteContact(contact)
+                          .then(function(result){
+                            alert("Contact " + contact.Name + " is deleted");
+                          })
+                          .catch(function(error){
+                            self.model.error = "Failed to delete contact " + contact.Name;
+                          });
+                },
+                cancelCallback:function(){
+                  ref.close();
+                }
+      } });
+  }
+
+  print(contact:Contact){
+    contact.IsPrint = true;
+    this.plaquesrv.updateContact(contact)
+      .then(result=>{
+        alert("Contact is set to print");
+      })
+      .catch(error=>{
+        this.model.error = "Failed to set contact " + contact.Name + " to print";
+      });
+  }
+
+  saveList(contact:Contact){
+    alert("save list contact");
   }
 }

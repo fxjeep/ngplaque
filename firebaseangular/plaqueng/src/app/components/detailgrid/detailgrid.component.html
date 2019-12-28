@@ -1,0 +1,25 @@
+<section class="app-detail">
+    <div class="field has-addons">
+        <p class="control has-icons-left is-expanded">
+            <input class="input" type="search" placeholder="Search name">
+            <span class="icon is-small is-left" >
+                    <i class="fas fa-search"></i>
+            </span>
+        </p>
+    </div>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th *ngFor="let column of columns">
+                        {{column.Name}}
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr editable-row [data]="model.newItem" [columns]="columns" [isEdit]="true" [isNew]="true" (saveData)="addNewItem($event)"></tr>
+            </tbody>
+        </table>
+    </div>
+</section> 

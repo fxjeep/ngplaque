@@ -28,9 +28,12 @@ import { ContactsComponent } from './components/contacts/contacts.component';
 import { PrintComponent } from './components/print/print.component';
 import { DataComponent } from './components/data/data.component';
 import { DetailTabComponent } from './components/detail-tab/detail-tab.component';
-import { DetailEditComponent } from './components/detail-edit/detail-edit.component';
 import { EditComponent } from './components/edit/edit.component';
-import { StringFilterPipe } from './service/string-filter.pipe';
+import { ContactFilterPipe } from './service/contactfilter.pipe';
+import { MessageboxComponent } from './components/messagebox/messagebox.component';
+import { DialogModule } from './dialogService/dialog.module';
+import { DetailgridComponent } from './components/detailgrid/detailgrid.component';
+import { EdtiableRowComponent } from './components/editable-row/editable-row.component';
 
 registerLocaleData(en);
 
@@ -45,9 +48,11 @@ registerLocaleData(en);
     PrintComponent,
     DataComponent,
     DetailTabComponent,
-    DetailEditComponent,
     EditComponent,
-    StringFilterPipe
+    ContactFilterPipe,
+    MessageboxComponent,
+    DetailgridComponent,
+    EdtiableRowComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +65,13 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     LoadingBarModule,
-    LoadingBarHttpClientModule
+    LoadingBarHttpClientModule,
+    DialogModule
   ],
   providers: [PlaqueService, AngularFireAuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    MessageboxComponent
+  ]
 })
 export class AppModule { }

@@ -9,7 +9,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
 const adminOnly = () => hasCustomClaim('admin');
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['sign-in']);
 const redirectLoggedInToContacts = () => redirectLoggedInTo(['edit']);
 const belongsToAccount = (next) => hasCustomClaim(`account-${next.params.id}`);
 

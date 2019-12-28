@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailEditComponent } from './detail-edit.component';
+import { DetailgridComponent } from './detailgrid.component';
 
-describe('DetailEditComponent', () => {
-  let component: DetailEditComponent;
-  let fixture: ComponentFixture<DetailEditComponent>;
+describe('DetailgridComponent', () => {
+  let component: DetailgridComponent;
+  let fixture: ComponentFixture<DetailgridComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailEditComponent ]
+      declarations: [ DetailgridComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetailEditComponent);
+    fixture = TestBed.createComponent(DetailgridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

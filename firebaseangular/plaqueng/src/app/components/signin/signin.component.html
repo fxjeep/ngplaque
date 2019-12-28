@@ -31,7 +31,7 @@
                       </p>
                       <div class="has-text-danger" *ngIf="f.submitted && password.errors?.required">Password is required.</div>
                     </div>
-                    <div class="field"> {{model.error}} </div>
+                    <div class="field has-text-danger"> {{model.error}} </div>
                     <div class="field">
                         <p class="control">
                           <button type="submit" class="button is-success">Login</button>

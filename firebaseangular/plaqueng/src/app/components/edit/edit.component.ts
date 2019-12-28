@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
+  selectContactKey : string = "";
   constructor() { }
 
   ngOnInit() {

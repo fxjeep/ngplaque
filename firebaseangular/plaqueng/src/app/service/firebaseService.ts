@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { database } from 'firebase/app';
-import { Contact } from './models';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Contact, PlaqueType, ColumnDefinition, getColumnDefinition } from './models';
 import { Observable } from 'rxjs';
 
 const ContactCollection:string = "Contacts";
@@ -13,12 +12,12 @@ const ContactCollection:string = "Contacts";
 export class PlaqueService {
  
   authState: any = null;
-  contactList: AngularFireList<Contact>;
+  contactCollection: AngularFirestoreCollection<Contact>;
 
   constructor(public afAuth: AngularFireAuth,
-              public db: AngularFireDatabase) {
+              public db: AngularFirestore) {
     this.afAuth.authState.subscribe((auth) => { this.authState = auth; });
-    this.contactList = db.list(ContactCollection);
+    this.contactCollection = db.collection<Contact>('Contacts');
   }
 
   isLoggedIn(){
@@ -26,6 +25,7 @@ export class PlaqueService {
   }
   
   login(email: string, password: string) {
+    this.afAuth.auth.setPersistence('none');
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
   
@@ -36,9 +36,31 @@ export class PlaqueService {
               });
   }
 
-  createContact(name:string, code: string) : database.ThenableReference{
+  createContact(name:string, code: string){
       let newContact = Contact.createNewContact(name, code);
-      let thenable = this.contactList.push(newContact)
-      return thenable;
+      try {
+        let data : any;
+        data = Object.assign({}, newContact);
+        return this.contactCollection.add(data);
+      }
+      catch(ex) {
+        return Promise.reject(ex);
+      }
+  }
+
+  deleteContact(contact:Contact){
+     return this.contactCollection.doc(contact.ContactId).delete();
+  }
+
+  updateContact(contact:Contact){
+    return this.contactCollection.doc(contact.ContactId).set(contact);
+  }
+
+  getColumnDefinition(type:PlaqueType) : ColumnDefinition[]{
+      return getColumnDefinition(type);
+  }
+
+  getData(type:PlaqueType) : any[]{
+    return [];
   }
 }

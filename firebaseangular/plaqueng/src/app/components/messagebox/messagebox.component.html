@@ -1,0 +1,14 @@
+<div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">{{config.data.title}}</p>
+      <button class="delete" aria-label="close" (click)="config.data.cancelCallback()"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+      <p>{{config.data.message}}</p>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success"  (click)="config.data.okCallback()">OK</button>
+      <button class="button"  (click)="config.data.cancelCallback()">Cancel</button>
+    </footer>
+  </div>

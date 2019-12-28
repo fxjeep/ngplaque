@@ -1,0 +1,19 @@
+<ng-template [ngIf]="isEdit" [ngIfElse]="viewTemplate">
+        <td *ngFor="let column of columns; let i=index">
+            <input class="input" type="text" *ngIf="column.IsEditable"
+                    [placeholder]="column.Name" 
+                    [name]="column.PropertyName" 
+                    [(ngModel)]="data[column.Name]"
+                    (keyup.enter)="onKeydown($event)"
+                    required
+                    >
+            <span *ngIf="i==0 && isNew">New:</span>
+        </td>
+        <td>press enter to add new name</td>
+</ng-template>
+<ng-template #viewTemplate>
+        <td *ngFor="let column of columns">
+            <span *ngIf="column.IsEditable">{{data[column.Name]}}</span>
+        </td>
+        <td>edit/save, delete button</td>
+</ng-template>

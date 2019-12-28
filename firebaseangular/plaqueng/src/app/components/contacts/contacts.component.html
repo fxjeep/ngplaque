@@ -8,11 +8,6 @@
                     <i class="fas fa-search"></i>
             </span>
         </p>
-        <button class="button is-primary" title="Search" (click)="search()">
-                <span class="icon is-small">
-                    <i class="fas fa-search"></i>
-                </span>
-        </button>        
     </div>
     <div class="buttons">
         <button class="button is-info" title="New Contact" (click)="showAdd(newContactForm)">
@@ -21,32 +16,8 @@
                 </span>
                 <span>New Contact</span>
         </button>       
-        <button class="button is-danger" title="Delete Contact">
-                <span class="icon is-small">
-                        <i class="fas fa-user-slash"></i>
-                </span>
-                <span>Delete</span>
-        </button>       
-        <button class="button is-success" title="Print Contact">
-                <span class="icon is-small">
-                        <i class="fas fa-print"></i>
-                </span>
-                <span>Print Plaque</span>
-        </button>
-        <button class="button is-warning" title="Print Contact Doc">
-                <span class="icon is-small">
-                        <i class="fas fa-table"></i>
-                </span>
-                <span>Print Detail</span>
-        </button>
-        <button class="button is-warning" title="Export Contact Data">
-                <span class="icon is-small">
-                        <i class="fas fa-file-export"></i>
-                </span>
-                <span>Export Data</span>
-        </button>
     </div>
-
+    <div class="has-text-danger">{{ model.error }}</div>
     <div>
     <table class="table is-bordered is-striped is-fullwidth is-hoverable">
         <thead>
@@ -55,19 +26,29 @@
             <th>Print</th>
             <th>Op</th>
         </thead>
-        <tbody>
-            <tr *ngFor="let contact of model.contacts | async; let i = index" [ngClass]="{'is-selected' : i==model.selectedRow}" (click)="setClickedRow(i)">
-                <td>{{contact.Name}}</td>
+        <tbody class="contactlist">
+            <tr *ngFor="let contact of model.contacts | async | ContactFilter: model.searchText" 
+                [ngClass]="{'is-selected' : contact==model.selectedContact, 'contactRow':true}" (click)="setClickedRow(contact)">
+                <td>
+                        <span *ngIf="contact.IsPrinted"><i class="fas fa-print"></i></span>
+                        {{contact.Name}}
+                </td>
                 <td>{{contact.Code}}</td>
                 <td>{{contact.LastPrint}}</td>
-                <td>{{contact.IsPrinted}}</td>
+                <td>
+                <div class="contact-op">
+                        <span title="Delete Contact" (click)="delete(contact)"><i class="fas fa-trash-alt"></i></span>&nbsp;
+                        <span title="Print Contact" (click)="print(contact)"><i class="fas fa-print"></i></span>&nbsp;
+                        <span title="Save Detail List" (click)="saveList(contact)"><i class="fas fa-list"></i></span>
+                </div>
+                </td>
             </tr>
         </tbody>
         </table>
     </div>
     <div class="modal" id="newContact" [ngClass]="model.showAdd?'is-active':''">
                 <div class="modal-background"></div>
-                <form #newContactForm="ngForm" name="newContact" (ngSubmit)="false" novalidate>
+                <form #newContactForm="ngForm" name="newContact" (ngSubmit)="newContactForm.form.valid" novalidate>
                 <div class="modal-card">
                                 
                     <header class="modal-card-head">
@@ -76,7 +57,6 @@
                     </header>
                     
                     <section class="modal-card-body">
-                        
                                 <div class="field">
                                         <label class="label">Contact Name</label>
                                         <div class="control has-icons-left has-icons-right">
@@ -105,7 +85,7 @@
                         
                     </section>
                     <footer class="modal-card-foot">
-                    <button class="button is-success" type="button" (click)="addContact()">Add</button>
+                    <button class="button is-success" type="submit" (click)="addContact(newContactForm.form.valid)">Add</button>
                     <button class="button" (click)="closeAdd()">Cancel</button>
                     </footer>
                 
