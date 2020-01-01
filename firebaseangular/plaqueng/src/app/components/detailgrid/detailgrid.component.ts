@@ -27,7 +27,7 @@ export class DetailgridComponent implements OnInit {
   }
 
   addNewItem(data){
-
+    alert(JSON.stringify(data));
   }
 
 }

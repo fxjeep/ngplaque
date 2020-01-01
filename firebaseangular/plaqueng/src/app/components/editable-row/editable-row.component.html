@@ -3,7 +3,7 @@
             <input class="input" type="text" *ngIf="column.IsEditable"
                     [placeholder]="column.Name" 
                     [name]="column.PropertyName" 
-                    [(ngModel)]="data[column.Name]"
+                    [(ngModel)]="data[column.PropertyName]"
                     (keyup.enter)="onKeydown($event)"
                     required
                     >
