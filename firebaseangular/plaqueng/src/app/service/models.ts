@@ -36,10 +36,10 @@ export class Dead {
     LastPrint: string;
 }
 
-export class Ancester {
+export class Ancestor {
     Surname: string;
     LiveName:string;
-    AncesterId:string;
+    AncestorId:string;
     IsPrint: boolean;
     LastPrint: string;
 }
@@ -62,7 +62,7 @@ export const DeadColumns = [
     new ColumnDefinition("Last Print", false, "LastPrint", "")
 ];
 
-export const AncesterColumns = [
+export const AncestorColumns = [
     new ColumnDefinition("Pnt", false, "IsPrint", "<i class=\"fas fa-print\"></i>"),
     new ColumnDefinition("Surname", true, "Surname", ""),
     new ColumnDefinition("Live Name", true, "LiveName", ""),
@@ -76,7 +76,7 @@ export function getColumnDefinition(ptype: PlaqueType) : ColumnDefinition[]{
         case PlaqueType.dead:
             return DeadColumns;
         case PlaqueType.ancestor:
-            return AncesterColumns
+            return AncestorColumns
     }
 }
 

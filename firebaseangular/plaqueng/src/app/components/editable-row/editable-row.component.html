@@ -8,6 +8,7 @@
                     required
                     >
             <span *ngIf="i==0 && isNew">New:</span>
+            <span class="has-text-danger">{{data['Error'][column.PropertyName]}}</span>
         </td>
         <td>press enter to add new name</td>
 </ng-template>

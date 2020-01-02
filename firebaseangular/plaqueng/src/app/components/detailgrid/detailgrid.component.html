@@ -19,6 +19,7 @@
             </thead>
             <tbody>
                 <tr editable-row [data]="model.newItem" [columns]="columns" [isEdit]="true" [isNew]="true" (saveData)="addNewItem($event)"></tr>
+                <tr editable-row [data]="model.data" [columns]="columns"></tr>
             </tbody>
         </table>
     </div>

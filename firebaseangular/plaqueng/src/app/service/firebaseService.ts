@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Contact, PlaqueType, ColumnDefinition, getColumnDefinition } from './models';
+import { Contact, Live, Dead, Ancestor, PlaqueType, ColumnDefinition, getColumnDefinition } from './models';
 import { Observable } from 'rxjs';
 
 const ContactCollection:string = "Contacts";
@@ -13,11 +13,17 @@ export class PlaqueService {
  
   authState: any = null;
   contactCollection: AngularFirestoreCollection<Contact>;
+  liveCollection : AngularFirestoreCollection<Live>;
+  deadCollection : AngularFirestoreCollection<Dead>;
+  ancestorCollection : AngularFirestoreCollection<Ancestor>;
 
   constructor(public afAuth: AngularFireAuth,
               public db: AngularFirestore) {
     this.afAuth.authState.subscribe((auth) => { this.authState = auth; });
     this.contactCollection = db.collection<Contact>('Contacts');
+    this.liveCollection = db.collection<Live>('Live');
+    this.deadCollection = db.collection<Dead>('Dead');
+    this.ancestorCollection = db.collection<Ancestor>('Ancestor');
   }
 
   isLoggedIn(){
@@ -60,7 +66,27 @@ export class PlaqueService {
       return getColumnDefinition(type);
   }
 
-  getData(type:PlaqueType) : any[]{
-    return [];
+  getData(type:PlaqueType) : any{
+    if (type == PlaqueType.live){
+      return this.liveCollection.valueChanges({idField:'LiveId'});
+    }
+    else if (type == PlaqueType.dead){
+      return this.deadCollection.valueChanges({idField:'DeadId'});
+    }
+    else if (type == PlaqueType.ancestor){
+      return this.ancestorCollection.valueChanges({idField:'AncestorId'});
+    }
+  }
+
+  addDetail(type:PlaqueType, data:any){
+    if (type == PlaqueType.live){
+      this.liveCollection.add(data);
+    }
+    else if (type == PlaqueType.dead){
+      this.deadCollection.add(data);
+    }
+    else if (type == PlaqueType.ancestor){
+      this.ancestorCollection.add(data);
+    }
   }
 }

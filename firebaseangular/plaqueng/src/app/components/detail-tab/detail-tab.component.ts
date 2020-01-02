@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact, LiveColumns, DeadColumns, AncesterColumns, PlaqueType } from '../../service/models';
+import { Contact, LiveColumns, DeadColumns, AncestorColumns, PlaqueType } from '../../service/models';
 
 @Component({
   selector: 'app-detail-tab',
@@ -9,18 +9,13 @@ import { Contact, LiveColumns, DeadColumns, AncesterColumns, PlaqueType } from '
 export class DetailTabComponent implements OnInit {
 
   model : any = {
-    lives:[],
-    deads:[],
-    ancesters:[],
-    liveColumns:LiveColumns,
-    deadColumns:DeadColumns,
-    ancesterColumns:AncesterColumns,
     Contact:{}
   }
 
   DetailType = PlaqueType
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
   }

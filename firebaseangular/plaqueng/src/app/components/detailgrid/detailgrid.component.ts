@@ -10,12 +10,14 @@ import { PlaqueService } from '../../service/firebaseService';
 export class DetailgridComponent implements OnInit {
 
   columns: ColumnDefinition[];
-  data: any[];
+  data: [];
   @Input() type: PlaqueType;
 
   model = {
-              newItem:{  }
-          };
+            data:[],
+            newItem:{
+                "Error":{}
+            }}
 
   constructor(public plaquesrv: PlaqueService) { 
 
@@ -23,11 +25,14 @@ export class DetailgridComponent implements OnInit {
 
   ngOnInit() {
     this.columns = this.plaquesrv.getColumnDefinition(this.type);
-    this.data = this.plaquesrv.getData(this.type);
+    this.model.data = this.plaquesrv.getData(this.type);
   }
 
-  addNewItem(data){
-    alert(JSON.stringify(data));
+  addNewItem(newItem){
+    //alert(JSON.stringify(data));
+    let data : any;
+    data = Object.assign({}, newItem);
+    this.plaquesrv.addDetail(this.type, data);
   }
 
 }

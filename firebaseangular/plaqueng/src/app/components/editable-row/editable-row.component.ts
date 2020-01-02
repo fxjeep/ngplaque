@@ -24,13 +24,18 @@ export class EdtiableRowComponent implements OnInit {
     var self =this;
     var allcorrect = true;
     if (event.key === "Enter") {
-      this.columns.forEach((item,index)=>{
-          if (item.IsEditable){
-            if (!self.data[item.PropertyName]){
-              allcorrect = false;
-            }
+      for(var i=0; i<this.columns.length; i++){
+        let item = this.columns[i];
+        if (item.IsEditable){
+          if (!self.data[item.PropertyName]){
+            self.data["Error"][item.PropertyName] = "please enter " + item.Name;
+            allcorrect = false;
           }
-      });
+          else{
+            self.data["Error"][item.PropertyName] = "";
+          }
+        }
+      };
 
       if (allcorrect){
         this.saveData.emit(this.data);

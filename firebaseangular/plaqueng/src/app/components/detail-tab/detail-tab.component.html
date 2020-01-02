@@ -24,8 +24,7 @@
         </ul>
     </div>
     <div  *ngIf="tab=='live'||!tab ">
-        <app-detailgrid [type]="DetailType.live" 
-                        ></app-detailgrid>
+        <app-detailgrid [type]="DetailType.live"></app-detailgrid>
     </div>
     <div  *ngIf="tab=='dead' ">
         <app-detailgrid [type]="DetailType.dead"></app-detailgrid>
