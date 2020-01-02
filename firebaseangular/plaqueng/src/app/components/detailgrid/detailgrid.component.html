@@ -19,7 +19,8 @@
             </thead>
             <tbody>
                 <tr editable-row [data]="model.newItem" [columns]="columns" [isEdit]="true" [isNew]="true" (saveData)="addNewItem($event)"></tr>
-                <tr editable-row [data]="model.data" [columns]="columns"></tr>
+                <tr *ngFor="let rowData of model.data | async"
+                    editable-row [data]="rowData" [columns]="columns"></tr>
             </tbody>
         </table>
     </div>

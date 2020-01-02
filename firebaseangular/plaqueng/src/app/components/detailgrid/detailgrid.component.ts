@@ -13,7 +13,7 @@ export class DetailgridComponent implements OnInit {
   data: [];
   @Input() type: PlaqueType;
 
-  model = {
+  model: any = {
             data:[],
             newItem:{
                 "Error":{}
