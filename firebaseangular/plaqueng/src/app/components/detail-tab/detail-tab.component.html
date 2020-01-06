@@ -24,13 +24,13 @@
         </ul>
     </div>
     <div  *ngIf="tab=='live'||!tab ">
-        <app-detailgrid [type]="DetailType.live"></app-detailgrid>
+        <app-detailgrid [type]="DetailType.live" [contact]="model.Contact"></app-detailgrid>
     </div>
     <div  *ngIf="tab=='dead' ">
-        <app-detailgrid [type]="DetailType.dead"></app-detailgrid>
+        <app-detailgrid [type]="DetailType.dead" [contact]="model.Contact"></app-detailgrid>
     </div>
     <div *ngIf="tab=='ancestor'">
-        <app-detailgrid [type]="DetailType.ancestor"></app-detailgrid>
+        <app-detailgrid [type]="DetailType.ancestor" [contact]="model.Contact"></app-detailgrid>
     </div>
 </div>
 </section>

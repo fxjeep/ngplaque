@@ -14,7 +14,7 @@
 </ng-template>
 <ng-template #viewTemplate>
         <td *ngFor="let column of columns">
-            <span *ngIf="column.IsEditable">{{data[column.Name]}}</span>
+            <span *ngIf="column.IsEditable">{{data[column.PropertyName]}}</span>
         </td>
         <td>edit/save, delete button</td>
 </ng-template>

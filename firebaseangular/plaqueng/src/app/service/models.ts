@@ -25,6 +25,8 @@ export class Live {
     LiveId: string;
     IsPrint: boolean;
     LastPrint: string;
+    ContactId: string;
+    Added: string;
 }
 
 export class Dead {
@@ -34,6 +36,8 @@ export class Dead {
     DeadId:string;
     IsPrint: boolean;
     LastPrint: string;
+    ContactId: string;
+    Added: string;
 }
 
 export class Ancestor {
@@ -42,6 +46,8 @@ export class Ancestor {
     AncestorId:string;
     IsPrint: boolean;
     LastPrint: string;
+    ContactId: string;
+    Added: string;
 }
 
 export class ColumnDefinition {

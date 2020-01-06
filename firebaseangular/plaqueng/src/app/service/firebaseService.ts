@@ -21,9 +21,7 @@ export class PlaqueService {
               public db: AngularFirestore) {
     this.afAuth.authState.subscribe((auth) => { this.authState = auth; });
     this.contactCollection = db.collection<Contact>('Contacts');
-    this.liveCollection = db.collection<Live>('Live');
-    this.deadCollection = db.collection<Dead>('Dead');
-    this.ancestorCollection = db.collection<Ancestor>('Ancestor');
+    
   }
 
   isLoggedIn(){
@@ -66,14 +64,17 @@ export class PlaqueService {
       return getColumnDefinition(type);
   }
 
-  getData(type:PlaqueType) : any{
+  getData(type:PlaqueType, contactId:string) : any{
     if (type == PlaqueType.live){
+      this.liveCollection = this.db.collection<Live>('Live', ref=>ref.where("ContactId", "==", contactId));
       return this.liveCollection.valueChanges({idField:'LiveId'});
     }
     else if (type == PlaqueType.dead){
+      this.deadCollection = this.db.collection<Dead>('Dead', ref=>ref.where("ContactId", "==", contactId));    
       return this.deadCollection.valueChanges({idField:'DeadId'});
     }
     else if (type == PlaqueType.ancestor){
+      this.ancestorCollection = this.db.collection<Ancestor>('Ancestor', ref=>ref.where("ContactId", "==", contactId));
       return this.ancestorCollection.valueChanges({idField:'AncestorId'});
     }
   }
