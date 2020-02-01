@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Contact, LiveColumns, DeadColumns, AncestorColumns, PlaqueType } from '../../service/models';
+import { Component, OnInit, Input } from '@angular/core';
+import { Contact, Live, Dead, Ancestor, PlaqueType } from '../../service/models';
+import { PlaqueService } from '../../service/firebaseService';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-detail-tab',
@@ -8,19 +10,24 @@ import { Contact, LiveColumns, DeadColumns, AncestorColumns, PlaqueType } from '
 })
 export class DetailTabComponent implements OnInit {
 
-  model : any = {
-    Contact:{}
-  }
+  @Input() Contact:any = {}
+  // Live : Observable<Live[]>;
+  // Dead :　Observable<Dead[]>;
+  // Ancestor :　Observable<Ancestor[]>;
 
   DetailType = PlaqueType
 
-  constructor() { 
+  constructor(public plaquesrv: PlaqueService) { 
   }
 
   ngOnInit() {
   }
 
   showDetails(contact:Contact){
-    this.model.Contact = contact;
+    this.Contact = contact;
+    this.plaquesrv.updateContact(contact);
+    // this.Live = this.plaquesrv.liveData;
+    // this.Dead = this.plaquesrv.deadData;
+    // this.Ancestor = this.plaquesrv.ancestorData;
   }
 }

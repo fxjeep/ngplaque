@@ -30,6 +30,7 @@ import { DataComponent } from './components/data/data.component';
 import { DetailTabComponent } from './components/detail-tab/detail-tab.component';
 import { EditComponent } from './components/edit/edit.component';
 import { ContactFilterPipe } from './service/contactfilter.pipe';
+import { DetailFilterPipe } from './service/detailfilter.pipe';
 import { MessageboxComponent } from './components/messagebox/messagebox.component';
 import { DialogModule } from './dialogService/dialog.module';
 import { DetailgridComponent } from './components/detailgrid/detailgrid.component';
@@ -50,6 +51,7 @@ registerLocaleData(en);
     DetailTabComponent,
     EditComponent,
     ContactFilterPipe,
+    DetailFilterPipe,
     MessageboxComponent,
     DetailgridComponent,
     EdtiableRowComponent

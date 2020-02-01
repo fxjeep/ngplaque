@@ -1,13 +1,14 @@
 <section class="app-detail">
     <div class="field has-addons">
         <p class="control has-icons-left is-expanded">
-            <input class="input" type="search" placeholder="Search name">
+            <input class="input" type="search" placeholder="Search name" [(ngModel)]="model.searchText">
             <span class="icon is-small is-left" >
                     <i class="fas fa-search"></i>
             </span>
         </p>
     </div>
     <div>
+        {{contact.Name}}
         <table border="1">
             <thead>
                 <tr>
@@ -19,7 +20,7 @@
             </thead>
             <tbody>
                 <tr editable-row [data]="model.newItem" [columns]="columns" [isEdit]="true" [isNew]="true" (saveData)="addNewItem($event)"></tr>
-                <tr *ngFor="let rowData of model.data | async"
+                <tr *ngFor="let rowData of data | async | DetailFilter:model.searchText"
                     editable-row [data]="rowData" [columns]="columns"></tr>
             </tbody>
         </table>

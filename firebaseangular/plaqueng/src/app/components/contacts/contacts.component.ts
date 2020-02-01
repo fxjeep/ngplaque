@@ -66,6 +66,7 @@ export class ContactsComponent implements OnInit {
    setClickedRow(contact){
     this.model.selectedContact = contact;
     this.editDetail.showDetails(contact);
+    this.plaquesrv.updateDetail(contact);
   }
 
   delete(contact:Contact){

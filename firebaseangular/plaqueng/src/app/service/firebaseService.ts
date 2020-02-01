@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Contact, Live, Dead, Ancestor, PlaqueType, ColumnDefinition, getColumnDefinition } from './models';
 import { Observable } from 'rxjs';
+import {  map} from "rxjs/operators";
 
 const ContactCollection:string = "Contacts";
  
@@ -16,6 +17,10 @@ export class PlaqueService {
   liveCollection : AngularFirestoreCollection<Live>;
   deadCollection : AngularFirestoreCollection<Dead>;
   ancestorCollection : AngularFirestoreCollection<Ancestor>;
+
+  liveData: Observable<Live[]>;
+  deadData: Observable<Dead[]>;
+  ancestorData: Observable<Ancestor[]>;
 
   constructor(public afAuth: AngularFireAuth,
               public db: AngularFirestore) {
@@ -64,18 +69,26 @@ export class PlaqueService {
       return getColumnDefinition(type);
   }
 
+  updateDetail(contact:Contact){
+      this.liveCollection = this.db.collection<Live>('Live', ref=>ref.where("ContactId", "==", contact.ContactId));
+      this.liveData = this.liveCollection.valueChanges({idField:'LiveId'});
+
+      this.deadCollection = this.db.collection<Dead>('Dead', ref=>ref.where("ContactId", "==", contact.ContactId));    
+      this.deadData = this.deadCollection.valueChanges({idField:'DeadId'});
+
+      this.ancestorCollection = this.db.collection<Ancestor>('Ancestor', ref=>ref.where("ContactId", "==", contact.ContactId));
+      this.ancestorData = this.ancestorCollection.valueChanges({idField:'AncestorId'});
+  }
+
   getData(type:PlaqueType, contactId:string) : any{
     if (type == PlaqueType.live){
-      this.liveCollection = this.db.collection<Live>('Live', ref=>ref.where("ContactId", "==", contactId));
-      return this.liveCollection.valueChanges({idField:'LiveId'});
+      return this.liveData;
     }
     else if (type == PlaqueType.dead){
-      this.deadCollection = this.db.collection<Dead>('Dead', ref=>ref.where("ContactId", "==", contactId));    
-      return this.deadCollection.valueChanges({idField:'DeadId'});
+      return this.deadData;
     }
     else if (type == PlaqueType.ancestor){
-      this.ancestorCollection = this.db.collection<Ancestor>('Ancestor', ref=>ref.where("ContactId", "==", contactId));
-      return this.ancestorCollection.valueChanges({idField:'AncestorId'});
+      return this.ancestorData;
     }
   }
 

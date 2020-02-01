@@ -1,8 +1,8 @@
 <section class="container">
-    <div *ngIf="!model.Contact.Name">Please select a Contact</div>
-    <div *ngIf="model.Contact.Name">
+    <div *ngIf="!Contact.Name">Please select a Contact</div>
+    <div *ngIf="Contact.Name">
     <div class="is-fullwidth">
-        <h1>{{model.Contact.Name}} - {{model.Contact.Code}}</h1>
+        <h1>{{Contact.Name}} - {{Contact.Code}}</h1>
     </div>
     <div class="tabs is-toggle is-fullwidth">
         <ul>
@@ -24,13 +24,13 @@
         </ul>
     </div>
     <div  *ngIf="tab=='live'||!tab ">
-        <app-detailgrid [type]="DetailType.live" [contact]="model.Contact"></app-detailgrid>
+        <app-detailgrid [type]="DetailType.live" [contact]="Contact"></app-detailgrid>
     </div>
     <div  *ngIf="tab=='dead' ">
-        <app-detailgrid [type]="DetailType.dead" [contact]="model.Contact"></app-detailgrid>
+        <app-detailgrid [type]="DetailType.dead" [contact]="Contact"></app-detailgrid>
     </div>
     <div *ngIf="tab=='ancestor'">
-        <app-detailgrid [type]="DetailType.ancestor" [contact]="model.Contact"></app-detailgrid>
+        <app-detailgrid [type]="DetailType.ancestor" [contact]="Contact"></app-detailgrid>
     </div>
 </div>
 </section>
