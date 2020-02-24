@@ -42,6 +42,7 @@ export class DetailgridComponent implements OnInit, OnChanges {
     newItem.Added = today.getTime();
     data = Object.assign({}, newItem);
     this.plaquesrv.addDetail(this.type, data);
+    this.model.newItem = { "Error":{} };
   }
 
 }

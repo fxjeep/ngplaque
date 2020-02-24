@@ -27,6 +27,10 @@ export class Live {
     LastPrint: string;
     ContactId: string;
     Added: string;
+
+    reset() {
+        this.Name = "";
+    }
 }
 
 export class Dead {
@@ -38,6 +42,12 @@ export class Dead {
     LastPrint: string;
     ContactId: string;
     Added: string;
+
+    reset() {
+        this.DeadName = "";
+        this.LiveName = "";
+        this.Relation = "";
+    }
 }
 
 export class Ancestor {
@@ -48,6 +58,11 @@ export class Ancestor {
     LastPrint: string;
     ContactId: string;
     Added: string;
+
+    reset() {
+        this.Surname = "";
+        this.LiveName = "";
+    }
 }
 
 export class ColumnDefinition {

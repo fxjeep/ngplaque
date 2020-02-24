@@ -16,5 +16,10 @@
         <td *ngFor="let column of columns">
             <span *ngIf="column.IsEditable">{{data[column.PropertyName]}}</span>
         </td>
-        <td>edit/save, delete button</td>
+        <td>
+                <span title="Edit" (click)="edit()"><i class="far fa-edit"></i></span>&nbsp;
+                <span title="Save" (click)="save()"><i class="fas fa-sd-card"></i></span>&nbsp;
+                <span title="Delete" (click)="delete()"><i class="far fa-trash-alt"></i></span>&nbsp;
+                <span title="Print this" (click)="printThis()"><i class="fas fa-print"></i></span>&nbsp;
+        </td>
 </ng-template>
