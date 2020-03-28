@@ -45,4 +45,7 @@ export class DetailgridComponent implements OnInit, OnChanges {
     this.model.newItem = { "Error":{} };
   }
 
+  setEdit(editItem){
+    this.plaquesrv.saveDetail(this.type, editItem);
+  }
 }

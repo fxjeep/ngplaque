@@ -20,7 +20,7 @@
             <tbody>
                 <tr editable-row [data]="model.newItem" [columns]="columns" [isEdit]="true" [isNew]="true" (saveData)="addNewItem($event)"></tr>
                 <tr *ngFor="let rowData of data | async | DetailFilter:model.searchText"
-                    editable-row [data]="rowData" [columns]="columns"></tr>
+                    editable-row [data]="rowData" [columns]="columns" (editData)="setEdit($event)"></tr>
             </tbody>
         </table>
     </div>

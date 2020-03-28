@@ -92,6 +92,21 @@ export class PlaqueService {
     }
   }
 
+  saveDetail(type:PlaqueType, data:any){
+    if (type == PlaqueType.live){
+      let itemDoc = this.db.doc<Live>('Live/'+data.LiveId);
+      itemDoc.update(data);
+    }
+    else if (type == PlaqueType.dead){
+      let itemDoc = this.db.doc<Dead>('Dead/'+data.DeadId);
+      itemDoc.update(data);
+    }
+    else if (type == PlaqueType.ancestor){
+      let itemDoc = this.db.doc<Dead>('Ancestor/'+data.AncestorId);
+      itemDoc.update(data);
+    }
+  }
+
   addDetail(type:PlaqueType, data:any){
     if (type == PlaqueType.live){
       this.liveCollection.add(data);

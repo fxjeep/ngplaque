@@ -46,3 +46,7 @@ tbody.contactlist > tr div.contact-op {
 .contactRow {
   cursor: pointer;
 }
+
+.action-icon {
+  font-size:  30px;
+}

@@ -14,6 +14,7 @@ export class EdtiableRowComponent implements OnInit {
   @Input() isNew: boolean;
 
   @Output() saveData = new EventEmitter();
+  @Output() editData = new EventEmitter();
 
   constructor() { }
 
@@ -24,22 +25,37 @@ export class EdtiableRowComponent implements OnInit {
     var self =this;
     var allcorrect = true;
     if (event.key === "Enter") {
-      for(var i=0; i<this.columns.length; i++){
-        let item = this.columns[i];
-        if (item.IsEditable){
-          if (!self.data[item.PropertyName]){
-            self.data["Error"][item.PropertyName] = "please enter " + item.Name;
-            allcorrect = false;
-          }
-          else{
-            self.data["Error"][item.PropertyName] = "";
-          }
-        }
-      };
+      this.save();
+    }
+  }
 
-      if (allcorrect){
-        this.saveData.emit(this.data);
+  showEdit(){
+    this.isEdit = true;
+  }
+
+  saveEdit(){
+    this.editData.emit(this.data);
+    this.isEdit = false;
+  }
+
+  save(){
+    var self =this;
+    var allcorrect = true;
+    for(var i=0; i<this.columns.length; i++){
+      let item = this.columns[i];
+      if (item.IsEditable){
+        if (!self.data[item.PropertyName]){
+          self.data["Error"][item.PropertyName] = "please enter " + item.Name;
+          allcorrect = false;
+        }
+        else{
+          self.data["Error"][item.PropertyName] = "";
+        }
       }
+    };
+
+    if (allcorrect){
+      this.saveData.emit(this.data);
     }
   }
 }
