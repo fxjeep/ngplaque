@@ -3,18 +3,21 @@ import { NgForm } from '@angular/forms';
 import { PlaqueService } from "../../service/firebaseService";
 import {DetailTabComponent} from "../detail-tab/detail-tab.component";
 import { Observable } from 'rxjs';
-import {Contact} from '../../service/models';
+import {Contact, PrintedEnum} from '../../service/models';
 import {DialogService} from '../../dialogService/dialog.service';
 import {MessageboxComponent} from '../messagebox/messagebox.component';
+import {Utils} from '../../service/Utils';
 
 @Component({
   selector: 'app-contacts',
-  templateUrl: './contacts.component.html',
+  templateUrl: './contacts.component.html', 
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
   
   @Input() editDetail: DetailTabComponent;
+
+  printedEnumCopy = PrintedEnum;
 
   model:any={
     showAdd:false,
@@ -23,7 +26,8 @@ export class ContactsComponent implements OnInit {
     searchText:'',
     contacts: [],
     selectedContact: null,
-    error: ""
+    error: "",
+    editId: ""
   }
 
   constructor(public plaquesrv: PlaqueService, public dialogSvr: DialogService) { 
@@ -91,17 +95,23 @@ export class ContactsComponent implements OnInit {
   }
 
   print(contact:Contact){
-    contact.IsPrint = true;
-    this.plaquesrv.updateContact(contact)
-      .then(result=>{
-        alert("Contact is set to print");
-      })
-      .catch(error=>{
-        this.model.error = "Failed to set contact " + contact.Name + " to print";
-      });
+    contact.IsPrinted = PrintedEnum.All;
+    contact.SinglePrint = "0,0,0";
+    contact.LastPrint = Utils.GetLastPrint();
+    this.plaquesrv.updateContact(contact);
   }
 
-  saveList(contact:Contact){
-    alert("save list contact");
+  unprint(contact:Contact){
+    contact.IsPrinted = (contact.SinglePrint && contact.SinglePrint == "0,0,0")?PrintedEnum.None:PrintedEnum.Partial;
+    this.plaquesrv.updateContact(contact);
+  }
+
+  edit(contact:Contact){
+    this.model.editId = contact.ContactId;
+  }
+
+  save(contact:Contact){
+    this.model.editId = "";
+    this.plaquesrv.updateContact(contact);
   }
 }

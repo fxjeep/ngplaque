@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ColumnDefinition } from '../../service/models';
+import { ColumnDefinition, PrintedEnum } from '../../service/models';
+import {DialogService} from '../../dialogService/dialog.service';
+import {MessageboxComponent} from '../messagebox/messagebox.component';
+import { PlaqueService } from "../../service/firebaseService";
 
 @Component({
   selector: '[editable-row]',
@@ -12,11 +15,15 @@ export class EdtiableRowComponent implements OnInit {
   @Input() data: any;
   @Input() isEdit: boolean;
   @Input() isNew: boolean;
+  @Input() isContactInPrint: boolean;
 
   @Output() saveData = new EventEmitter();
   @Output() editData = new EventEmitter();
+  @Output() deleteData = new EventEmitter();
 
-  constructor() { }
+  printedEnumCopy = PrintedEnum;
+
+  constructor(public plaquesrv: PlaqueService, public dialogSvr: DialogService) { }
 
   ngOnInit() {
   }
@@ -38,6 +45,21 @@ export class EdtiableRowComponent implements OnInit {
     this.isEdit = false;
   }
 
+  showDeleteConfirm(){
+    let self = this;
+    const ref = this.dialogSvr.open(MessageboxComponent, 
+      { data: { message: 'Delete '+ this.plaquesrv.getMainName(this.data) +' ?',
+                title: 'Confirm Delete',
+                okCallback: function(){
+                      ref.close();
+                      self.deleteData.emit(self.data);
+                },
+                cancelCallback:function(){
+                  ref.close();
+                }
+      } });
+  }
+
   save(){
     var self =this;
     var allcorrect = true;
@@ -57,5 +79,10 @@ export class EdtiableRowComponent implements OnInit {
     if (allcorrect){
       this.saveData.emit(this.data);
     }
+  }
+
+  togglePrint(){
+    this.data.IsPrinted = !this.data.IsPrinted;
+    this.editData.emit(this.data);
   }
 }

@@ -1,1 +1,34 @@
-<p>data works!</p>
+<section>
+    <article class="message">
+        <div class="message-header">
+            <p>Import</p>
+            <button class="button" (click)="import()">Import</button>
+        </div>
+        <div class="message-body">
+            <p>Format: type, livename/deadname/surname, livename, relation</p>
+            <p>Example:<br/>
+            1. l, 张三<br/>
+            2. d, 张三, 张四，儿子<br/>
+            3. a, 张, 张四<br/>
+            4. c, 张三, Z01089<br/>
+            </p>
+            <textarea class="textarea" [(ngModel)]="importLines"></textarea>
+            <pre>{{importLog}}</pre>
+        </div>
+    </article>
+    <article class="message">
+        <div class="message-header">
+            <p>Export</p>
+        </div>
+        <div class="message-body">
+            <div class="buttons">
+                <button class="button is-info">All Contacts</button>
+                <button class="button is-success">All Lives</button>
+                <button class="button is-warning">All Deads</button>
+                <button class="button is-danger">All Ancesters</button>
+            </div>
+        </div>
+    </article>
+    
+    
+</section>

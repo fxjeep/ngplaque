@@ -6,4 +6,10 @@ export class Utils {
             return v.toString(16);
         });
     }
+
+    static GetLastPrint():string{
+        let now = new Date();  
+        let year = now.getFullYear(); let month = now.getMonth(); let date = now.getDate();
+        return year.toString() + "-" + (month+1).toString().padStart(2, '0') + "-" + date.toString().padStart(2,'0');
+    }
 }

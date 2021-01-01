@@ -1,48 +1,35 @@
 <section class="app-print">
-        <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title title">
-                    Print List
-                  </p>
-                </header>
-                <div class="card-content">
-                  <div class="content">
-                        <table class="table is-bordered is-striped is-fullwidth is-hoverable">
-                                <thead>
-                                    <th>Name</th>
-                                    <th>Code</th>
-                                    <th>Print</th>
-                                    <th>Op</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>ttt</td>
-                                        <td>t0012</td>
-                                        <td>2018-01-01</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                            <td>ttt</td>
-                                            <td>t0012</td>
-                                            <td>2018-01-01</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                                <td>ttt</td>
-                                                <td>t0012</td>
-                                                <td>2018-01-01</td>
-                                                <td></td>
-                                            </tr>
-        
-                            </tbody>   
-                        </table>    
-                  </div>
-                </div>
-                <footer class="card-footer">
-                  <a href="#" class="card-footer-item">Create Print Files</a>
-                  <a href="#" class="card-footer-item">Clear All</a>
-                  <a href="#" class="card-footer-item">Refresh</a>
-                </footer>
-              </div>
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title title">
+                Print List
+            </p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+                <table class="table is-bordered is-striped is-fullwidth is-hoverable">
+                    <thead>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Print</th>
+                        <th>Counts/(Live,Dead,Ancestor)</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let contact of printList | async">
+                            <td>{{contact.Code}}</td>
+                            <td>{{contact.Name}}</td>
+                            <td>{{contact.LastPrint}}</td>
+                            <td>{{contact.IsPrinted==1?"All":contact.SinglePrint}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer class="card-footer">
+            <span class="card-footer-item">Create Print Files</span>
+            <span class="card-footer-item">Clear All</span>
+            <span class="card-footer-item" (click)="getPrints()">Refresh</span>
+        </footer>
+    </div>
 
-</section>  
+</section>

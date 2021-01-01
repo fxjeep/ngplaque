@@ -47,5 +47,10 @@ export class DetailgridComponent implements OnInit, OnChanges {
 
   setEdit(editItem){
     this.plaquesrv.saveDetail(this.type, editItem);
+    this.plaquesrv.updateCount(this.contact, editItem, this.type);
+  }
+
+  deleteData(delItem){
+    this.plaquesrv.deleteDetail(this.type, delItem);
   }
 }

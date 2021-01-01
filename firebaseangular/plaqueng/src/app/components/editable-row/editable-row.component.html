@@ -1,25 +1,23 @@
 <ng-template [ngIf]="isEdit" [ngIfElse]="viewTemplate">
-        <td *ngFor="let column of columns; let i=index">
-            <input class="input" type="text" *ngIf="column.IsEditable"
-                    [placeholder]="column.Name" 
-                    [name]="column.PropertyName" 
-                    [(ngModel)]="data[column.PropertyName]"
-                    (keyup.enter)="onKeydown($event)"
-                    required
-                    >
-            <span *ngIf="i==0 && isNew">New:</span>
-            <span class="has-text-danger">{{data['Error'][column.PropertyName]}}</span>
-        </td>
-        <td *ngIf="isEdit && !isNew"> 
-                <span title="Save" (click)="saveEdit()"><i class="fas fa-sd-card action-icon"></i></span>&nbsp;
-        </td>
+    <td *ngFor="let column of columns; let i=index">
+        <input class="input" type="text" *ngIf="column.IsEditable" [placeholder]="column.Name" [name]="column.PropertyName" [(ngModel)]="data[column.PropertyName]" (keyup.enter)="onKeydown($event)" required>
+        <span *ngIf="i==0 && isNew">New:</span>
+        <span class="has-text-danger">{{data['Error'][column.PropertyName]}}</span>
+    </td>
+    <td *ngIf="isEdit && !isNew">
+        <span title="Save" (click)="saveEdit()"><i class="fas fa-sd-card action-icon"></i></span>&nbsp;
+    </td>
 </ng-template>
 <ng-template #viewTemplate>
-        <td *ngFor="let column of columns">
-            <span *ngIf="column.IsEditable">{{data[column.PropertyName]}}</span>
-        </td>
-        <td>
-                <span title="Edit" (click)="showEdit()"><i class="far fa-edit action-icon"></i></span>&nbsp;
-               
-        </td>
+    <td *ngFor="let column of columns">
+        <span *ngIf="data.IsPrinted && column.Name=='Pnt'"><i class="fas fa-print"></i></span>
+        <span *ngIf="column.IsEditable">{{data[column.PropertyName]}}</span>
+    </td>
+    <td>
+        <span title="Edit" (click)="showEdit()"><i class="far fa-edit action-icon"></i></span>&nbsp;
+        <span title="Delete" (click)="showDeleteConfirm()"><i class="far fa-trash-alt action-icon"></i></span>&nbsp;
+        <span title="Print" (click)="togglePrint()" *ngIf="isContactInPrint != printedEnumCopy.All && !data.IsPrinted"><i class="fas fa-print action-icon"></i></span>&nbsp;
+        <span title="Unprint" (click)="togglePrint()" *ngIf="isContactInPrint != printedEnumCopy.All && data.IsPrinted"><i class="fas fa-tint-slash action-icon"></i></span>&nbsp;
+
+    </td>
 </ng-template>

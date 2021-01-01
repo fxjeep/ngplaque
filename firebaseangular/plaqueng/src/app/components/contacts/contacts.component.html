@@ -1,10 +1,8 @@
 <section class="app-contact">
     <div class="field has-addons">
         <p class="control has-icons-left is-expanded">
-            <input class="input" type="search" placeholder="Search code or name"
-                        #searchText="ngModel" 
-                         [(ngModel)]="model.searchText">
-            <span class="icon is-small is-left" >
+            <input class="input" type="search" placeholder="Search code or name" #searchText="ngModel" [(ngModel)]="model.searchText">
+            <span class="icon is-small is-left">
                     <i class="fas fa-search"></i>
             </span>
         </p>
@@ -15,81 +13,79 @@
                     <i class="fas fa-user-plus"></i>
                 </span>
                 <span>New Contact</span>
-        </button>       
+        </button>
     </div>
     <div class="has-text-danger">{{ model.error }}</div>
     <div>
-    <table class="table is-bordered is-striped is-fullwidth is-hoverable">
-        <thead>
-            <th>Name</th>
-            <th>Code</th>
-            <th>Print</th>
-            <th>Op</th>
-        </thead>
-        <tbody class="contactlist">
-            <tr *ngFor="let contact of model.contacts | async | ContactFilter: model.searchText" 
-                [ngClass]="{'is-selected' : contact==model.selectedContact, 'contactRow':true}" (click)="setClickedRow(contact)">
-                <td>
-                        <span *ngIf="contact.IsPrinted"><i class="fas fa-print"></i></span>
-                        {{contact.Name}}
-                </td>
-                <td>{{contact.Code}}</td>
-                <td>{{contact.LastPrint}}</td>
-                <td>
-                <div class="contact-op">
-                        <span title="Delete Contact" (click)="delete(contact)"><i class="fas fa-trash-alt action-icon"></i></span>&nbsp;
-                        <span title="Print Contact" (click)="print(contact)"><i class="fas fa-print action-icon"></i></span>&nbsp;
-                        <span title="Save Detail List" (click)="saveList(contact)"><i class="fas fa-list action-icon"></i></span>
-                </div>
-                </td>
-            </tr>
-        </tbody>
+        <table class="table is-bordered is-striped is-fullwidth is-hoverable">
+            <thead>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Print</th>
+                <th>Op</th>
+            </thead>
+            <tbody class="contactlist">
+                <tr *ngFor="let contact of model.contacts | async | ContactFilter: model.searchText" [ngClass]="{'is-selected' : contact==model.selectedContact, 'contactRow':true}" (click)="setClickedRow(contact)">
+                    <td>
+                        <span *ngIf="contact.IsPrinted==printedEnumCopy.All && contact.ContactId != model.editId"><i class="fas fa-print"></i></span>
+                        <span *ngIf="contact.ContactId != model.editId"> {{contact.Name}}</span>
+                        <input class="input" type="text" *ngIf="contact.ContactId == model.editId" [placeholder]="Name" [name]="Name" [(ngModel)]="contact.Name" required>
+                    </td>
+                    <td>
+                        <span *ngIf="contact.ContactId != model.editId">{{contact.Code}}</span>
+                        <input class="input" type="text" *ngIf="contact.ContactId == model.editId" [placeholder]="Code" [name]="Code" [(ngModel)]="contact.Code" required>
+                    </td>
+                    <td>{{contact.LastPrint}}</td>
+                    <td>
+                        <div class="contact-op">
+                            <span title="Delete Contact" (click)="delete(contact)"><i class="fas fa-trash-alt action-icon"></i></span>&nbsp;
+                            <span title="Print Contact" (click)="print(contact)" *ngIf="contact.IsPrinted !=  printedEnumCopy.All"><i class="fas fa-print action-icon"></i></span>&nbsp;
+                            <span title="Unprint" (click)="unprint(contact)" *ngIf="contact.IsPrinted ==  printedEnumCopy.All"><i class="fas fa-tint-slash action-icon"></i></span>&nbsp;
+                            <span title="Edit" (click)="edit(contact);$event.stopPropagation()" *ngIf="contact.ContactId != model.editId"><i class="fas fa-edit action-icon"></i></span>
+                            <span title="Save" (click)="save(contact);$event.stopPropagation()" *ngIf="contact.ContactId == model.editId"><i class="fas fa-save action-icon"></i></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
     <div class="modal" id="newContact" [ngClass]="model.showAdd?'is-active':''">
-                <div class="modal-background"></div>
-                <form #newContactForm="ngForm" name="newContact" (ngSubmit)="newContactForm.form.valid" novalidate>
-                <div class="modal-card">
-                                
-                    <header class="modal-card-head">
+        <div class="modal-background"></div>
+        <form #newContactForm="ngForm" name="newContact" (ngSubmit)="newContactForm.form.valid" novalidate>
+            <div class="modal-card">
+
+                <header class="modal-card-head">
                     <p class="modal-card-title">Add New Contact</p>
                     <button class="delete" aria-label="close" (click)="closeAdd()"></button>
-                    </header>
-                    
-                    <section class="modal-card-body">
-                                <div class="field">
-                                        <label class="label">Contact Name</label>
-                                        <div class="control has-icons-left has-icons-right">
-                                                <input class="input is-success" type="text" placeholder="Text input" name="newName" required
-                                                #newName="ngModel" 
-                                                [ngClass]="{ 'is-danger': newContactForm.submitted && newName.invalid }"
-                                                [(ngModel)]="model.newName">
-                                                <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
-                                        </div>
-                                     <p class="help has-text-danger"
-                                        *ngIf="newContactForm.submitted && newName.errors?.required">Name is required</p>
-                                </div>
-                                <div class="field">
-                                        <label class="label">Contact Code</label>
-                                        <div class="control has-icons-left has-icons-right">
-                                                <input class="input is-success" type="text" placeholder="Text input" name="newCode" required
-                                                #newCode="ngModel" 
-                                                [ngClass]="{ 'is-danger': newContactForm.submitted && newCode.invalid }"
-                                                [(ngModel)]="model.newCode">
-                                                <span class="icon is-small is-left"><i class="fas fa-code"></i></span>
-                                        </div>
-                                        <p class="help has-text-danger"                                        
-                                                *ngIf="newContactForm.submitted && newCode.errors?.required">Code is required</p>
-                                </div>
-        
-                        
-                    </section>
-                    <footer class="modal-card-foot">
+                </header>
+
+                <section class="modal-card-body">
+                    <div class="field">
+                        <label class="label">Contact Name</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input is-success" type="text" placeholder="Text input" name="newName" required #newName="ngModel"
+                                     [ngClass]="{ 'is-danger': newContactForm.submitted && newName.invalid }" [(ngModel)]="model.newName">
+                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                        </div>
+                        <p class="help has-text-danger" *ngIf="newContactForm.submitted && newName.errors?.required">Name is required</p>
+                    </div>
+                    <div class="field">
+                        <label class="label">Contact Code</label>
+                        <div class="control has-icons-left has-icons-right">
+                            <input class="input is-success" type="text" placeholder="Text input" name="newCode" required #newCode="ngModel" [ngClass]="{ 'is-danger': newContactForm.submitted && newCode.invalid }" [(ngModel)]="model.newCode">
+                            <span class="icon is-small is-left"><i class="fas fa-code"></i></span>
+                        </div>
+                        <p class="help has-text-danger" *ngIf="newContactForm.submitted && newCode.errors?.required">Code is required</p>
+                    </div>
+
+
+                </section>
+                <footer class="modal-card-foot">
                     <button class="button is-success" type="submit" (click)="addContact(newContactForm.form.valid)">Add</button>
                     <button class="button" (click)="closeAdd()">Cancel</button>
-                    </footer>
-                
-                </div>
-        </form>
+                </footer>
+
             </div>
+        </form>
+    </div>
 </section>

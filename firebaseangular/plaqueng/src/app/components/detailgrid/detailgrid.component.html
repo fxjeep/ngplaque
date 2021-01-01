@@ -7,6 +7,8 @@
             </span>
         </p>
     </div>
+    <div *ngIf="contact.IsPrinted">All names print because contact is in printing</div>
+    <div *ngIf="!contact.IsPrinted">Toggle each name for print</div>
     <div>
         <table border="1">
             <thead>
@@ -14,13 +16,15 @@
                     <th *ngFor="let column of columns">
                         {{column.Name}}
                     </th>
-                    <th></th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr editable-row [data]="model.newItem" [columns]="columns" [isEdit]="true" [isNew]="true" (saveData)="addNewItem($event)"></tr>
                 <tr *ngFor="let rowData of data | async | DetailFilter:model.searchText"
-                    editable-row [data]="rowData" [columns]="columns" (editData)="setEdit($event)"></tr>
+                    editable-row [data]="rowData" [columns]="columns" 
+                                                  [isContactInPrint]="contact.IsPrinted"
+                                                (editData)="setEdit($event)" (deleteData)="deleteData($event)"></tr>
             </tbody>
         </table>
     </div>
