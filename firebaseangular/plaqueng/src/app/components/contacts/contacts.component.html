@@ -29,11 +29,11 @@
                     <td>
                         <span *ngIf="contact.IsPrinted==printedEnumCopy.All && contact.ContactId != model.editId"><i class="fas fa-print"></i></span>
                         <span *ngIf="contact.ContactId != model.editId"> {{contact.Name}}</span>
-                        <input class="input" type="text" *ngIf="contact.ContactId == model.editId" [placeholder]="Name" [name]="Name" [(ngModel)]="contact.Name" required>
+                        <input class="input" type="text" *ngIf="contact.ContactId == model.editId" placeholder="Name" name="Name" [(ngModel)]="contact.Name" required>
                     </td>
                     <td>
                         <span *ngIf="contact.ContactId != model.editId">{{contact.Code}}</span>
-                        <input class="input" type="text" *ngIf="contact.ContactId == model.editId" [placeholder]="Code" [name]="Code" [(ngModel)]="contact.Code" required>
+                        <input class="input" type="text" *ngIf="contact.ContactId == model.editId" placeholder="Code" name="Code" [(ngModel)]="contact.Code" required>
                     </td>
                     <td>{{contact.LastPrint}}</td>
                     <td>

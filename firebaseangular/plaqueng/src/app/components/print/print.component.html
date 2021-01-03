@@ -15,7 +15,7 @@
                         <th>Counts/(Live,Dead,Ancestor)</th>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let contact of printList | async">
+                        <tr *ngFor="let contact of printList">
                             <td>{{contact.Code}}</td>
                             <td>{{contact.Name}}</td>
                             <td>{{contact.LastPrint}}</td>
@@ -26,10 +26,10 @@
             </div>
         </div>
         <footer class="card-footer">
-            <span class="card-footer-item">Create Print Files</span>
+            <button class="button is-primary" (click)="generatePrintData()">Create Print Files</button>
             <span class="card-footer-item">Clear All</span>
             <span class="card-footer-item" (click)="getPrints()">Refresh</span>
         </footer>
     </div>
-
+    <a [href]="downloadLink" *ngIf="showDownload" [download]="downloadFileName"></a>
 </section>

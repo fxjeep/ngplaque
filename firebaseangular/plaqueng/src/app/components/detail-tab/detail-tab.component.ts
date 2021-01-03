@@ -14,7 +14,8 @@ export class DetailTabComponent implements OnInit {
   // Live : Observable<Live[]>;
   // Dead :　Observable<Dead[]>;
   // Ancestor :　Observable<Ancestor[]>;
-
+  tab:string;
+  
   DetailType = PlaqueType
 
   constructor(public plaquesrv: PlaqueService) { 

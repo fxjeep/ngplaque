@@ -35,6 +35,8 @@ import { MessageboxComponent } from './components/messagebox/messagebox.componen
 import { DialogModule } from './dialogService/dialog.module';
 import { DetailgridComponent } from './components/detailgrid/detailgrid.component';
 import { EdtiableRowComponent } from './components/editable-row/editable-row.component';
+import { InsertionDirective } from './service/insertion.directive';
+import { PrintPageComponent } from './print-page/print-page.component';
 
 registerLocaleData(en);
 
@@ -54,7 +56,9 @@ registerLocaleData(en);
     DetailFilterPipe,
     MessageboxComponent,
     DetailgridComponent,
-    EdtiableRowComponent
+    EdtiableRowComponent,
+    InsertionDirective,
+    PrintPageComponent
   ],
   imports: [
     BrowserModule,

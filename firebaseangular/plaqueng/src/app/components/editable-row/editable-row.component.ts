@@ -15,7 +15,7 @@ export class EdtiableRowComponent implements OnInit {
   @Input() data: any;
   @Input() isEdit: boolean;
   @Input() isNew: boolean;
-  @Input() isContactInPrint: boolean;
+  @Input() isContactInPrint: PrintedEnum;
 
   @Output() saveData = new EventEmitter();
   @Output() editData = new EventEmitter();

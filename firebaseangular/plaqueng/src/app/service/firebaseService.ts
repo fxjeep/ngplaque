@@ -87,7 +87,7 @@ export class PlaqueService {
 
   
 
-  getData(type:PlaqueType, contactId:string) : any{
+  getData(type:PlaqueType) : any{
     if (type == PlaqueType.live){
       return this.liveData;
     }

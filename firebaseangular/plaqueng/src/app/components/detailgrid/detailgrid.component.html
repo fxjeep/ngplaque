@@ -7,8 +7,11 @@
             </span>
         </p>
     </div>
-    <div *ngIf="contact.IsPrinted">All names print because contact is in printing</div>
-    <div *ngIf="!contact.IsPrinted">Toggle each name for print</div>
+    <div><span *ngIf="contact.IsPrinted">All names print because contact is in printing</span>
+        <span *ngIf="!contact.IsPrinted">Toggle each name for print</span>
+        <span>Press enter to add new record after typing</span>
+    </div>
+    
     <div>
         <table border="1">
             <thead>

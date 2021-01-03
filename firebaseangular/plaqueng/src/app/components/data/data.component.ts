@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Live, PlaqueType, Dead, Ancestor, Contact } from 'src/app/service/models';
+import { Live, PlaqueType, Dead, Ancestor, Contact, PlaqueRecordType } from 'src/app/service/models';
 import { PlaqueService } from "../../service/firebaseService";
 
 @Component({
@@ -27,16 +27,16 @@ export class DataComponent implements OnInit {
           if (!line) return;
           var fields = line.split(",");
           if (fields.length>0){
-            if (fields[0].trim().toLowerCase() == "l"){
+            if (fields[0].trim().toLowerCase() == PlaqueRecordType.live){
               self.importLive(fields, lineCount);
             }
-            else if (fields[0].trim().toLowerCase() == "d"){
+            else if (fields[0].trim().toLowerCase() == PlaqueRecordType.dead){
               self.importDead(fields, lineCount);
             }
-            else if (fields[0].trim().toLowerCase() == "a"){
+            else if (fields[0].trim().toLowerCase() == PlaqueRecordType.ancester){
               self.importAncestor(fields, lineCount);
             }
-            else if (fields[0].trim().toLowerCase() == "c"){
+            else if (fields[0].trim().toLowerCase() == PlaqueRecordType.contact){
               self.importContact(fields, lineCount);
             }
           }

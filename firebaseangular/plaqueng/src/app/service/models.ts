@@ -6,6 +6,13 @@ export enum PrintedEnum {
     Partial=2
   }
 
+export const PlaqueRecordType = {
+    live:"l",
+    dead:"d",
+    ancester:"a",
+    contact:"c"
+}
+
 export class Contact {
     Name : string;
     Code : string;
