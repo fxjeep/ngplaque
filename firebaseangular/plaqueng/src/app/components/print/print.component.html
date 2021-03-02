@@ -23,13 +23,16 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div>File
         </div>
         <footer class="card-footer">
             <button class="button is-primary" (click)="generatePrintData()">Create Print Files</button>
-            <span class="card-footer-item">Clear All</span>
+            <span class="button is-primary" (click)="clearPrintData()">Clear All</span>
             <span class="card-footer-item" (click)="getPrints()">Refresh</span>
         </footer>
+        <div>
+            <a [href]="downloadLink" *ngIf="showDownload" [download]="downloadFileName">{{downloadFileName}}</a>
+        </div>
     </div>
-    <a [href]="downloadLink" *ngIf="showDownload" [download]="downloadFileName"></a>
+    
 </section>

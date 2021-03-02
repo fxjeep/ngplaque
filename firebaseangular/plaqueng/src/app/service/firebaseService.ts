@@ -87,7 +87,22 @@ export class PlaqueService {
 
   
 
-  getData(type:PlaqueType) : any{
+  getPartialPrintData(type:PlaqueType, contactId:string) : any{
+    if (type == PlaqueType.live){
+      return this.db.collection<Live>('Live', ref=>ref.where("ContactId", "==", contactId)
+                                                      .where("IsPrinted", "==", true)).valueChanges();
+    }
+    else if (type == PlaqueType.dead){
+      return this.db.collection<Dead>('Dead', ref=>ref.where("ContactId", "==", contactId)
+                                                      .where("IsPrinted", "==", true)).valueChanges();
+    }
+    else if (type == PlaqueType.ancestor){
+      return this.db.collection<Ancestor>('Ancestor', ref=>ref.where("ContactId", "==", contactId)
+                                                      .where("IsPrinted", "==", true)).valueChanges();
+    }
+  }
+
+  getData(type: PlaqueType):any{
     if (type == PlaqueType.live){
       return this.liveData;
     }
