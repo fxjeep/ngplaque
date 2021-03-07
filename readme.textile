@@ -1,4 +1,4 @@
-h1. Plaque name database edit
+h1. Plaque name database editor
 
 angular version to replace my old wpf program.
 
