@@ -39,43 +39,39 @@ export class PrintComponent implements OnInit {
      let txt = [];
      if (this.printList){
         let self = this;
-        this.printList.forEach(async function(contact){
-            let lineArray = [PlaqueRecordType.contact, contact.Name, contact.Code, contact.LastPrint, contact.SinglePrint];
-            txt.push(lineArray.join(delimiter));
+        for(const contact of this.printList)
+        {
+          let lineArray = [PlaqueRecordType.contact, contact.Name, contact.Code, contact.LastPrint, contact.SinglePrint];
+          txt.push(lineArray.join(delimiter));
 
-            if (contact.IsPrinted == PrintedEnum.All){
-              //get all data and save to text
-              self.plaquesrv.updateDetail(contact);
+          if (contact.IsPrinted == PrintedEnum.All){
+            //get all data and save to text
+            self.plaquesrv.updateDetail(contact);
 
-              let liveDataPromise = self.getPromise(PlaqueType.live, txt, contact.ContactId, contact.Code);
-              await liveDataPromise;
+            let liveDataPromise = self.getPromise(PlaqueType.live, txt, contact.ContactId, contact.Code);
+            await liveDataPromise;
 
-              let deadDataPromise = self.getPromise(PlaqueType.dead, txt, contact.ContactId, contact.Code);
-              await deadDataPromise;
+            let deadDataPromise = self.getPromise(PlaqueType.dead, txt, contact.ContactId, contact.Code);
+            await deadDataPromise;
 
-              let ancesterDataPromise = self.getPromise(PlaqueType.ancestor, txt, contact.ContactId, contact.Code);
-              await ancesterDataPromise;
+            let ancesterDataPromise = self.getPromise(PlaqueType.ancestor, txt, contact.ContactId, contact.Code);
+            await ancesterDataPromise;
+          }
+          else if (contact.IsPrinted == PrintedEnum.Partial) {
+            let liveDataPromise = self.getPartialPrintPromise(PlaqueType.live, txt, contact.ContactId, contact.Code);
+            await liveDataPromise;
 
-              // Promise.all([
-              //   liveDataPromise,
-              //   deadDataPromise,
-              //   ancesterDataPromise
-              // ]).then((result)=>{
-                  
-              self.createDownloadFile(txt);
-              //});
-            }
-            else if (contact.IsPrinted == PrintedEnum.Partial) {
-              let liveDataPromise = self.getPartialPrintPromise(PlaqueType.live, txt, contact.ContactId, contact.Code);
-              await liveDataPromise;
+            let deadDataPromise = self.getPartialPrintPromise(PlaqueType.dead, txt, contact.ContactId, contact.Code);
+            await deadDataPromise;
 
-              let deadDataPromise = self.getPartialPrintPromise(PlaqueType.dead, txt, contact.ContactId, contact.Code);
-              await deadDataPromise;
-
-              let ancesterDataPromise = self.getPartialPrintPromise(PlaqueType.ancestor, txt, contact.ContactId, contact.Code);
-              await ancesterDataPromise;
-            }
-        });
+            let ancesterDataPromise = self.getPartialPrintPromise(PlaqueType.ancestor, txt, contact.ContactId, contact.Code);
+            await ancesterDataPromise;
+          }
+        }
+        // this.printList.forEach(async function(contact){
+            
+        // });
+        self.createDownloadFile(txt);
      }
   }
 
