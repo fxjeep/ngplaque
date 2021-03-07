@@ -5,12 +5,13 @@
             <button class="button" (click)="import()">Import</button>
         </div>
         <div class="message-body">
-            <p>Format: type, livename/deadname/surname, livename, relation</p>
+            <p>Format: type, contactcode, livename/deadname/surname, livename, relation</p>
+            <p>contact must exist before other data can be imported.</p>
             <p>Example:<br/>
             1. l, L1234, 张三<br/>
             2. d, L1234, 张三, 张四，儿子<br/>
             3. a, L1234, 张, 张四<br/>
-            4. c, 张三, Z01089<br/>
+            4. c, Z01089, 张三<br/>
             </p>
             <textarea class="textarea" [(ngModel)]="importLines"></textarea>
             <pre>{{importLog}}</pre>

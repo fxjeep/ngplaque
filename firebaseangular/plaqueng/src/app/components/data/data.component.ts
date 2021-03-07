@@ -112,7 +112,7 @@ export class DataComponent implements OnInit {
         this.addLog("line:"+lineCount+": contact needs name and code");
         return;
      }
-     this.plaquesrv.createContact(fields[1], fields[2].toUpperCase());
+     this.plaquesrv.createContact(fields[2], fields[1].toUpperCase());
      this.addLog("contact "+fields[1]+" added");
   }
 
